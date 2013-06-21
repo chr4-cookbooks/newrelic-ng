@@ -1,0 +1,31 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+- name: ubuntu-13.04
+  driver_config:
+    box: opscode-ubuntu-13.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box
+
+
+suites:
+- name: nrsysmond-default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[newrelic-ng::nrsysmond-default]
+  attributes:
+    newrelic-ng:
+      nrsysmond:
+        config:
+          license_key: 'TESTKEY_NRSYSMOND'
+
+- name: plugin-agent-default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[newrelic-ng::plugin-agent-default]
+  attributes:
+    newrelic-ng:
+      plugin-agent:
+        license_key: 'TESTKEY_PLUGIN_AGENT'

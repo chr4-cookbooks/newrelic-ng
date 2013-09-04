@@ -5,6 +5,8 @@ This cookbook provides LWRPs and recipes to install and configure different moni
 * Official Newrelic nrsysmond
 * MeetMe [newrelic-plugin-agent](https://github.com/MeetMe/newrelic-plugin-agent)
 
+This cookbook requires Chef 11 or later.
+
 ## Attributes
 
 ### server monitoring with nrsysmond

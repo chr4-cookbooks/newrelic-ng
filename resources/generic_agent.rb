@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-actions        :create
-default_action :create
+actions        :install_and_configure, :install, :configure
+default_action :install_and_configure
 
 attribute :license_key, kind_of: String, name_attribute: true
 attribute :name,        kind_of: String, required: true

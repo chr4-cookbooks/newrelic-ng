@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-action :create do
+action :configure do
   service 'newrelic-sysmond' do
     supports status: true, restart: true
     action   :enable

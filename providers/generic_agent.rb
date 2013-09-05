@@ -103,7 +103,15 @@ def configure_agent
   end
 end
 
-action :create do
+action :install_and_configure do
   install_agent
+  configure_agent
+end
+
+action :install do
+  install_client
+end
+
+action :configure do
   configure_agent
 end

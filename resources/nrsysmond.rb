@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-actions        :create
-default_action :create
+actions        :configure
+default_action :configure
 
 attribute :license_key,    kind_of: String, name_attribute: true
 attribute :ssl,            kind_of: [ TrueClass, FalseClass ], default: node['newrelic-ng']['nrsysmond']['config']['ssl']

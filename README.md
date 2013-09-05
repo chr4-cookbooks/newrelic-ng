@@ -255,6 +255,15 @@ user       'newrelic'
 group      'newrelic'
 ```
 
+The following actions are supported
+
+```ruby
+action :install_and_configure # default
+action :install               # only install the agent
+action :configure             # only configure the agent
+```
+
+
 # Contributing
 
 e.g.

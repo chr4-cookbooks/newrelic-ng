@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-action :create do
+action :configure do
   r = template new_resource.config_file do
     cookbook  new_resource.cookbook
     source    new_resource.source

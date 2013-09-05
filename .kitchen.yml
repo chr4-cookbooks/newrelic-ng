@@ -9,6 +9,21 @@ platforms:
     box: opscode-ubuntu-13.04
     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box
 
+- name: ubuntu-12.10
+  driver_config:
+    box: opscode-ubuntu-12.10
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.10_provisionerless.box
+
+- name: ubuntu-12.04
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+
+- name: debian-7
+  driver_config:
+    box: opscode-debian-7
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_debian-7.1.0_provisionerless.box
+
 
 suites:
 - name: nrsysmond-default
@@ -17,7 +32,7 @@ suites:
   - recipe[newrelic-ng::nrsysmond-default]
   attributes:
     newrelic-ng:
-      license_key: 'TESTKEY_NRSYSMOND'
+      license_key: TESTKEY_NRSYSMOND
 
 - name: plugin-agent-default
   run_list:
@@ -25,4 +40,25 @@ suites:
   - recipe[newrelic-ng::plugin-agent-default]
   attributes:
     newrelic-ng:
-      license_key: 'TESTKEY_PLUGIN_AGENT'
+      license_key: TESTKEY_PLUGIN_AGENT
+
+- name: generic-agent-default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[newrelic-ng::generic-agent-default]
+  attributes:
+    newrelic-ng:
+      license_key: TESTKEY_GENERIC_AGENT
+      generic-agent:
+        agents:
+          nginx_status_agent:
+            source: http://nginx.com/download/newrelic/newrelic_nginx_agent.tar.gz
+            config: >
+              - instance_name: nginx_agent_test
+                status_url: http://localhost/nginx_stub_status
+          sidekiq_status_agent:
+            source: https://github.com/eksoverzero/newrelic_sidekiq_agent/archive/V2.0.tar.gz
+            config: >
+              - instance_name: sidekiq_agent_test
+                uri: redis://localhost:6379
+                namespace: namespace

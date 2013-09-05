@@ -20,16 +20,16 @@
 
 # server monitoring
 default['newrelic-ng']['nrsysmond']['config'] = {
-  'license_key' => node['newrelic-ng']['license_key'],
-  'loglevel' => 'info',
-  'logfile' => '/var/log/newrelic/nrsysmond.log',
-  'proxy' => nil,
-  'ssl' => true,
-  'ssl_ca_bundle' => nil,
-  'ssl_ca_path' => nil,
-  'pidfile' => nil,
-  'collector_host' => nil,
-  'timeout' => nil,
+  license_key: node['newrelic-ng']['license_key'],
+  loglevel: 'info',
+  logfile: '/var/log/newrelic/nrsysmond.log',
+  proxy: nil,
+  ssl: true,
+  ssl_ca_bundle: nil,
+  ssl_ca_path: nil,
+  pidfile: nil,
+  collector_host: nil,
+  timeout: nil,
 }
 
 default['newrelic-ng']['nrsysmond']['config_file'] = '/etc/newrelic/nrsysmond.cfg'

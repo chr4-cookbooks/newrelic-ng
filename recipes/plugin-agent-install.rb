@@ -56,6 +56,6 @@ template '/etc/init.d/newrelic-plugin-agent' do
   mode      00755
   cookbook  'newrelic-ng'
   source    'newrelic-plugin-agent.init.erb'
-  variables :config_file => node['newrelic-ng']['plugin-agent']['config_file']
+  variables config_file: node['newrelic-ng']['plugin-agent']['config_file']
   only_if { node['platform_family'] == 'debian' }
 end

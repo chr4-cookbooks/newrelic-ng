@@ -23,20 +23,20 @@ apt_repository 'newrelic' do
   distribution node['newrelic-ng']['nrsysmond']['apt']['repo']['distribution']
   components   node['newrelic-ng']['nrsysmond']['apt']['repo']['components']
   key          node['newrelic-ng']['nrsysmond']['apt']['repo']['key']
-  only_if      { node['platform_family'] == 'debian' }
+  only_if    { node['platform_family'] == 'debian' }
 end
 
 if node['platform_family'] == 'rhel'
   rpm_path = "#{Chef::Config[:file_cache_path]}/#{::File.basename(node['newrelic-ng']['nrsysmond']['rpm']['repo']['package'])}"
 
   remote_file rpm_path do
-      source node['newrelic-ng']['nrsysmond']['rpm']['repo']['url']
-      action :create_if_missing
+    source node['newrelic-ng']['nrsysmond']['rpm']['repo']['url']
+    action :create_if_missing
   end
 
   package node['newrelic-ng']['nrsysmond']['rpm']['repo']['package'] do
-      source rpm_path
-      provider Chef::Provider::Package::Rpm
-      action :install
+    provider Chef::Provider::Package::Rpm
+    source   rpm_path
+    action   :install
   end
 end

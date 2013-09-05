@@ -20,7 +20,7 @@
 
 action :create do
   service 'newrelic-sysmond' do
-    supports :status => true, :restart => true
+    supports status: true, restart: true
     action   :enable
   end
 
@@ -34,16 +34,16 @@ action :create do
     group     new_resource.group
     mode      new_resource.mode
 
-    variables :license_key    => new_resource.license_key,
-              :ssl            => new_resource.ssl,
-              :logfile        => new_resource.logfile,
-              :loglevel       => new_resource.loglevel,
-              :proxy          => new_resource.proxy,
-              :ssl_ca_bundle  => new_resource.ssl_ca_bundle,
-              :ssl_ca_path    => new_resource.ssl_ca_path,
-              :pidfile        => new_resource.pidfile,
-              :collector_host => new_resource.collector_host,
-              :timeout        => new_resource.timeout
+    variables license_key:    new_resource.license_key,
+              ssl:            new_resource.ssl,
+              logfile:        new_resource.logfile,
+              loglevel:       new_resource.loglevel,
+              proxy:          new_resource.proxy,
+              ssl_ca_bundle:  new_resource.ssl_ca_bundle,
+              ssl_ca_path:    new_resource.ssl_ca_path,
+              pidfile:        new_resource.pidfile,
+              collector_host: new_resource.collector_host,
+              timeout:        new_resource.timeout
 
     notifies  :restart, 'service[newrelic-sysmond]'
   end

@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.3.0:
+
+* Adds support for generic newrelic agents (e.g. newrelic_nginx_agent, newrelic_sidekiq_agent)
+
 ## 0.2.0:
 
 * Uses shared node['newrelic-ng']['license_key'] variable for all services

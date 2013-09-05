@@ -27,7 +27,7 @@ attribute :pidfile,        kind_of: String,  default: node['newrelic-ng']['plugi
 attribute :logfile,        kind_of: String,  default: node['newrelic-ng']['plugin-agent']['logfile']
 attribute :service_config, kind_of: String,  default: node['newrelic-ng']['plugin-agent']['service_config']
 
-attribute :owner,          kind_of: String,  default: node['newrelic-ng']['plugin-agent']['owner']
+attribute :owner,          kind_of: String,  default: node['newrelic-ng']['plugin-agent']['user']
 attribute :group,          kind_of: String,  default: node['newrelic-ng']['plugin-agent']['group']
 attribute :mode,           kind_of: String,  default: node['newrelic-ng']['plugin-agent']['mode']
 attribute :config_file,    kind_of: String,  default: node['newrelic-ng']['plugin-agent']['config_file']

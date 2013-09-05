@@ -33,7 +33,7 @@ default['newrelic-ng']['nrsysmond']['config'] = {
 }
 
 default['newrelic-ng']['nrsysmond']['config_file'] = '/etc/newrelic/nrsysmond.cfg'
-default['newrelic-ng']['nrsysmond']['owner'] = 'root'
+default['newrelic-ng']['nrsysmond']['user'] = 'root'
 default['newrelic-ng']['nrsysmond']['group'] = 'newrelic'
 default['newrelic-ng']['nrsysmond']['mode'] = 00640
 

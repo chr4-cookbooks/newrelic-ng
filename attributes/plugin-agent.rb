@@ -24,7 +24,7 @@ default['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic_
 default['newrelic-ng']['plugin-agent']['service_config'] = ''
 
 default['newrelic-ng']['plugin-agent']['config_file'] = '/etc/newrelic/newrelic_plugin_agent.cfg'
-default['newrelic-ng']['plugin-agent']['owner'] = 'newrelic'
+default['newrelic-ng']['plugin-agent']['user'] = 'newrelic'
 default['newrelic-ng']['plugin-agent']['group'] = 'newrelic'
 default['newrelic-ng']['plugin-agent']['mode'] = 00640
 default['newrelic-ng']['plugin-agent']['pip_package'] = 'newrelic-plugin-agent'

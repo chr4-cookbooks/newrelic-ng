@@ -1,0 +1,109 @@
+#
+# Cookbook Name:: newrelic-ng
+# Provider:: generic_agent
+#
+# Copyright 2012, Chris Aumann
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+def install_agent
+  # we need to make sure we have a unique name.
+  # bundler might be installed already in e.g. the chruby/rvm environment
+  gem_package "bundler (#{new_resource.name})" do
+    package_name 'bundler'
+  end
+
+  package 'gzip'  if new_resource.source  =~ /\.(tgz|gz)$/
+  package 'bzip2' if new_resource.source  =~ /\.bz2$/
+
+  target = "#{new_resource.target_dir}/#{new_resource.name}"
+
+  directory target do
+    mode      00755
+    recursive true
+  end
+
+
+  # create newrelic user
+  group new_resource.group do
+    system true
+  end
+
+  # we need a shell, because we are using 'su' later to start the daemon
+  user new_resource.user do
+    gid    new_resource.group
+    shell  '/bin/sh'
+    system true
+  end
+
+
+  daemon = "#{new_resource.target_dir}/#{new_resource.name}/newrelic_#{new_resource.name.split('_').first}_agent.daemon"
+
+  remote_file "#{Chef::Config[:file_cache_path]}/#{::File.basename(new_resource.source)}" do
+    source   new_resource.source
+    action   :create_if_missing
+  end
+
+  execute "extract_#{new_resource.name}" do
+    command "tar --strip-components=1 -xvzf #{::File.basename(new_resource.source)} -C #{target}" if new_resource.source  =~ /\.(tgz|gz)$/
+    command "tar --strip-components=1 -xvjf #{::File.basename(new_resource.source)} -C #{target}" if new_resource.source  =~ /\.bz2$/
+
+    cwd     Chef::Config[:file_cache_path]
+    not_if { ::File.exists?(daemon) }
+  end
+
+  execute "bundle_install_#{new_resource.name}" do
+    command 'bundle install'
+    cwd     target
+  end
+
+  execute "chown_#{new_resource.name}" do
+    command "chown -R #{new_resource.user}:#{new_resource.group} #{target}"
+  end
+end
+
+
+def configure_agent
+  config_file = "#{new_resource.target_dir}/#{new_resource.name}/config/newrelic_plugin.yml"
+
+  r = template config_file do
+    owner     new_resource.user
+    group     new_resource.group
+    mode      00644
+    source    'generic-agent.yml.erb'
+    cookbook  'newrelic-ng'
+    variables license_key: new_resource.license_key,
+              name:        new_resource.name,
+              config:      new_resource.config
+  end
+  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
+
+  daemon = "#{new_resource.target_dir}/#{new_resource.name}/newrelic_#{new_resource.name.split('_').first}_agent.daemon"
+
+  service "newrelic_plugin_#{new_resource.name}" do
+    supports        status: true
+    start_command   "su #{new_resource.user} -c '#{daemon} start'"
+    stop_command    "su #{new_resource.user} -c '#{daemon} stop'"
+    status_command  "su #{new_resource.user} -c '#{daemon} status'"
+
+    subscribes      :restart, "template[#{config_file}]"
+    action          :start
+  end
+end
+
+action :create do
+  install_agent
+  configure_agent
+end

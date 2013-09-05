@@ -14,7 +14,7 @@ This cookbook requires Chef 11 or later.
 You can set your Newrelic license_key in the following attribute
 
 ```ruby
-node['newrelic-ng']['nrsysmond']['config']['license_key'] = 'CHANGE_ME'
+node['newrelic-ng']['license_key'] = 'CHANGE_ME'
 ```
 
 The 'config' attribute actually supports all other configuration options that nrsysmond accepts.
@@ -32,7 +32,7 @@ For a complete list of attributes, please see [here](https://github.com/flinc-ch
 You can set your Newrelic license key (note: this one is usually different than the one for server monitoring), as well as other options in the following attribute (default values shown below)
 
 ```ruby
-node['newrelic-ng']['plugin-agent']['license_key'] = 'CHANGE_ME'
+node['newrelic-ng']['license_key'] = 'CHANGE_ME'
 node['newrelic-ng']['plugin-agent']['poll_interval'] = 60
 node['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic_plugin_agent.pid'
 node['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic_plugin_agent.log'

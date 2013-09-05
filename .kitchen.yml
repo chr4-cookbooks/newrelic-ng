@@ -17,9 +17,7 @@ suites:
   - recipe[newrelic-ng::nrsysmond-default]
   attributes:
     newrelic-ng:
-      nrsysmond:
-        config:
-          license_key: 'TESTKEY_NRSYSMOND'
+      license_key: 'TESTKEY_NRSYSMOND'
 
 - name: plugin-agent-default
   run_list:
@@ -27,5 +25,4 @@ suites:
   - recipe[newrelic-ng::plugin-agent-default]
   attributes:
     newrelic-ng:
-      plugin-agent:
-        license_key: 'TESTKEY_PLUGIN_AGENT'
+      license_key: 'TESTKEY_PLUGIN_AGENT'

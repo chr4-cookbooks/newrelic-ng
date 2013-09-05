@@ -20,4 +20,4 @@
 
 include_recipe 'newrelic-ng::nrsysmond-install'
 
-newrelic_ng_nrsysmond node['newrelic-ng']['nrsysmond']['config']['license_key']
+newrelic_ng_nrsysmond node['newrelic-ng']['license_key']

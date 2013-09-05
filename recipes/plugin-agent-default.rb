@@ -20,4 +20,4 @@
 
 include_recipe 'newrelic-ng::plugin-agent-install'
 
-newrelic_ng_plugin_agent node['newrelic-ng']['plugin-agent']['license_key']
+newrelic_ng_plugin_agent node['newrelic-ng']['license_key']

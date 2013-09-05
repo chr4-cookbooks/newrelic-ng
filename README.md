@@ -206,7 +206,7 @@ postgresql:
   dbname: postgres
 EOS
 
-  # path and attributes of nrsysmon
+  # path and attributes of nrsysmond
   owner       'root'
   group       'root'
   mode        00600

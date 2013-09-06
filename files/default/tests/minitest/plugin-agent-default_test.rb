@@ -24,7 +24,7 @@ describe 'newrelic-ng::plugin-agent-default' do
   include Helpers::TestHelper
 
   it 'installs plugin-agent' do
-    file('/usr/local/bin/newrelic_plugin_agent').must_exist
+    file(which('newrelic_plugin_agent')).must_exist
   end
 
   it 'must set license key' do

@@ -46,11 +46,15 @@ end
   end
 end
 
+init_script_template = value_for_platform_family(
+    ['centos','fedora','rhel','amazon', 'suse', 'scientific'] => 'plugin-agent-init-rhel.erb',
+    ['debian', 'ubuntu'] => 'plugin-agent-init-deb.erb'
+  )
+
 # deploy initscript
 template '/etc/init.d/newrelic-plugin-agent' do
   mode      00755
   cookbook  'newrelic-ng'
-  source    'newrelic-plugin-agent.init.erb'
-  variables config_file: node['newrelic-ng']['plugin-agent']['config_file']
-  only_if { node['platform_family'] == 'debian' }
+  source    init_script_template
+  variables :config_file => node['newrelic-ng']['plugin-agent']['config_file']
 end

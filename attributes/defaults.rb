@@ -19,3 +19,4 @@
 #
 
 default['newrelic-ng']['license_key'] = 'CHANGE ME'
+default['newrelic-ng']['arch'] = node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i386'

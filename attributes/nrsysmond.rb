@@ -36,7 +36,6 @@ default['newrelic-ng']['nrsysmond']['user'] = 'root'
 default['newrelic-ng']['nrsysmond']['group'] = 'newrelic'
 default['newrelic-ng']['nrsysmond']['mode'] = 00640
 
-default['newrelic-ng']['arch'] = node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i386'
 default['newrelic-ng']['nrsysmond']['rpm']['repo']['url'] =  "http://download.newrelic.com/pub/newrelic/el5/#{node['newrelic-ng']['arch']}/newrelic-repo-5-3.noarch.rpm"
 default['newrelic-ng']['nrsysmond']['rpm']['repo']['package'] = 'newrelic-repo'
 

@@ -8,6 +8,6 @@ version          '0.3.1'
 depends          'apt'
 depends          'python'
 
-%w{ ubuntu debian redhat centos fedora amazon suse scientific }.each do |os|
+%w{ ubuntu debian redhat centos amazon suse scientific }.each do |os|
   supports os
 end

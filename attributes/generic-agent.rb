@@ -20,5 +20,3 @@
 
 default['newrelic-ng']['generic-agent']['url'] = nil
 default['newrelic-ng']['generic-agent']['target_dir'] = '/opt/newrelic-agents'
-default['newrelic-ng']['generic-agent']['user'] = 'newrelic'
-default['newrelic-ng']['generic-agent']['group'] = 'newrelic'

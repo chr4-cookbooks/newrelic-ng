@@ -27,15 +27,11 @@ python_pip 'newrelic-plugin-agent' do
   action :install
 end
 
-# create newrelic user
-group node['newrelic-ng']['plugin-agent']['group'] do
-  system true
-end
-
-user node['newrelic-ng']['plugin-agent']['user'] do
-  gid    node['newrelic-ng']['plugin-agent']['group']
-  shell  '/bin/sh'
-  system true
+newrelic_ng_user 'default' do
+  name   node['newrelic-ng']['user']['name']
+  group  node['newrelic-ng']['user']['group']
+  shell  node['newrelic-ng']['user']['shell']
+  system node['newrelic-ng']['user']['system']
 end
 
 # create config/run/log directories

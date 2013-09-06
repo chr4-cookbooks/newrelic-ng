@@ -28,26 +28,19 @@ def install_agent
   package 'gzip'  if new_resource.source  =~ /\.(tgz|gz)$/
   package 'bzip2' if new_resource.source  =~ /\.bz2$/
 
+  newrelic_ng_user 'default' do
+    name   new_resource.name
+    group  new_resource.group
+    shell  new_resource.shell
+    system new_resource.system
+  end
+
   target = "#{new_resource.target_dir}/#{new_resource.name}"
 
   directory target do
     mode      00755
     recursive true
   end
-
-
-  # create newrelic user
-  group new_resource.group do
-    system true
-  end
-
-  # we need a shell, because we are using 'su' later to start the daemon
-  user new_resource.user do
-    gid    new_resource.group
-    shell  '/bin/sh'
-    system true
-  end
-
 
   daemon = "#{new_resource.target_dir}/#{new_resource.name}/newrelic_#{new_resource.name.split('_').first}_agent.daemon"
 

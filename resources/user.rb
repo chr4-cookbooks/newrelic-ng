@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic-ng
-# Attributes:: plugin-agent
+# Resource:: user
 #
 # Copyright 2012, Chris Aumann
 #
@@ -18,11 +18,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-default['newrelic-ng']['plugin-agent']['poll_interval'] = 60
-default['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic_plugin_agent.pid'
-default['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic_plugin_agent.log'
-default['newrelic-ng']['plugin-agent']['service_config'] = ''
+actions        :create, :delete
+default_action :create
 
-default['newrelic-ng']['plugin-agent']['config_file'] = '/etc/newrelic/newrelic_plugin_agent.cfg'
-default['newrelic-ng']['plugin-agent']['mode'] = 00640
-default['newrelic-ng']['plugin-agent']['pip_package'] = 'newrelic-plugin-agent'
+attribute :name,   kind_of: String, name_attribute: true
+attribute :group,  kind_of: String, default: node['newrelic-ng']['user']['group']
+attribute :shell,  kind_of: String, default: node['newrelic-ng']['user']['shell']
+attribute :system, kind_of: [ TrueClass, FalseClass ], default: node['newrelic-ng']['user']['system']

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic-ng
-# Attributes:: plugin-agent
+# Provider:: user
 #
 # Copyright 2012, Chris Aumann
 #
@@ -18,11 +18,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-default['newrelic-ng']['plugin-agent']['poll_interval'] = 60
-default['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic_plugin_agent.pid'
-default['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic_plugin_agent.log'
-default['newrelic-ng']['plugin-agent']['service_config'] = ''
+action :create do
+  group new_resource.group do
+    system new_resource.system
+  end
 
-default['newrelic-ng']['plugin-agent']['config_file'] = '/etc/newrelic/newrelic_plugin_agent.cfg'
-default['newrelic-ng']['plugin-agent']['mode'] = 00640
-default['newrelic-ng']['plugin-agent']['pip_package'] = 'newrelic-plugin-agent'
+  # we need a shell, because we are using 'su' later to start the daemon
+  user new_resource.name do
+    gid    new_resource.group
+    shell  new_resource.shell
+    system new_resource.system
+  end
+end
+
+action :delete do
+  group(new_resource.group) { action :delete }
+  user(new_resource.name) { action :delete }
+end

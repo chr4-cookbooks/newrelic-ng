@@ -32,8 +32,8 @@ attribute :pidfile,        kind_of: String,  default: node['newrelic-ng']['nrsys
 attribute :collector_host, kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['collector_host']
 attribute :timeout,        kind_of: Integer, default: node['newrelic-ng']['nrsysmond']['config']['timeout']
 
-attribute :owner,          kind_of: String,  default: node['newrelic-ng']['nrsysmond']['user']
-attribute :group,          kind_of: String,  default: node['newrelic-ng']['nrsysmond']['group']
+attribute :owner,          kind_of: String,  default: 'root'
+attribute :group,          kind_of: String,  default: node['newrelic-ng']['user']['group']
 attribute :mode,           kind_of: String,  default: node['newrelic-ng']['nrsysmond']['mode']
 attribute :config_file,    kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config_file']
 

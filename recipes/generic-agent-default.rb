@@ -20,7 +20,7 @@
 
 node['newrelic-ng']['generic-agent']['agents'].each do |name, keys|
   newrelic_ng_generic_agent node['newrelic-ng']['license_key'] do
-    name name
+    name   name
     source keys[:source]
     config keys[:config]
   end

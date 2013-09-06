@@ -70,7 +70,7 @@ def install_agent
   end
 
   execute "chown_#{new_resource.name}" do
-    command "chown -R #{new_resource.user}:#{new_resource.group} #{target}"
+    command "chown -R #{new_resource.owner}:#{new_resource.group} #{target}"
   end
 end
 
@@ -79,7 +79,7 @@ def configure_agent
   config_file = "#{new_resource.target_dir}/#{new_resource.name}/config/newrelic_plugin.yml"
 
   r = template config_file do
-    owner     new_resource.user
+    owner     new_resource.owner
     group     new_resource.group
     mode      00644
     source    'generic-agent.yml.erb'
@@ -94,9 +94,9 @@ def configure_agent
 
   service "newrelic_plugin_#{new_resource.name}" do
     supports        status: true
-    start_command   "su #{new_resource.user} -c '#{daemon} start'"
-    stop_command    "su #{new_resource.user} -c '#{daemon} stop'"
-    status_command  "su #{new_resource.user} -c '#{daemon} status'"
+    start_command   "su #{new_resource.owner} -c '#{daemon} start'"
+    stop_command    "su #{new_resource.owner} -c '#{daemon} stop'"
+    status_command  "su #{new_resource.owner} -c '#{daemon} status'"
 
     subscribes      :restart, "template[#{config_file}]"
     action          :start

@@ -251,7 +251,7 @@ You can specify the following additional attributes
 
 ```ruby
 target_dir '/opt/newrelic-agents'
-user       'newrelic'
+owner      'newrelic'
 group      'newrelic'
 ```
 

@@ -26,5 +26,5 @@ attribute :name,        kind_of: String, required: true
 attribute :source,      kind_of: String, required: true
 attribute :config,      kind_of: String, required: true
 attribute :target_dir,  kind_of: String, default: node['newrelic-ng']['generic-agent']['target_dir']
-attribute :user,        kind_of: String, default: node['newrelic-ng']['generic-agent']['user']
+attribute :owner,       kind_of: String, default: node['newrelic-ng']['generic-agent']['user']
 attribute :group,       kind_of: String, default: node['newrelic-ng']['generic-agent']['group']

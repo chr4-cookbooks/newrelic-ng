@@ -26,7 +26,7 @@ apt_repository 'newrelic' do
   only_if    { node['platform_family'] == 'debian' }
 end
 
-if node['platform_family'] == 'rhel'
+if ['fedora','rhel'].include? node['platform_family']
   rpm_path = "#{Chef::Config[:file_cache_path]}/#{::File.basename(node['newrelic-ng']['nrsysmond']['rpm']['repo']['package'])}"
 
   remote_file rpm_path do

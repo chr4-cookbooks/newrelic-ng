@@ -27,7 +27,7 @@ describe 'newrelic-ng::plugin-agent-default' do
     file('/usr/local/bin/newrelic_plugin_agent').must_exist
   end
 
-  it 'must set license key ' do
+  it 'must set license key' do
     file(node['newrelic-ng']['plugin-agent']['config_file']).must_include('TESTKEY_PLUGIN_AGENT')
   end
 

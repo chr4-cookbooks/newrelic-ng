@@ -27,7 +27,7 @@ describe 'newrelic-ng::nrsysmond-default' do
     package('newrelic-sysmond').must_be_installed
   end
 
-  it 'must set license key ' do
+  it 'must set license key' do
     file(node['newrelic-ng']['nrsysmond']['config_file']).must_include('TESTKEY_NRSYSMOND')
   end
 

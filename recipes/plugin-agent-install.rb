@@ -40,8 +40,8 @@ end
   node['newrelic-ng']['plugin-agent']['logfile'] ].each do |dir|
 
   directory ::File.dirname(dir) do
-    owner node['newrelic-ng']['plugin-agent']['user']
-    group node['newrelic-ng']['plugin-agent']['group']
+    owner node['newrelic-ng']['user']['name']
+    group node['newrelic-ng']['user']['group']
     mode  00755
   end
 end

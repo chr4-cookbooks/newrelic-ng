@@ -18,7 +18,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# server monitoring
 default['newrelic-ng']['nrsysmond']['config'] = {
   license_key: node['newrelic-ng']['license_key'],
   loglevel: 'info',

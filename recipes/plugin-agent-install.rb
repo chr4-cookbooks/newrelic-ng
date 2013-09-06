@@ -34,8 +34,7 @@ end
 
 user node['newrelic-ng']['plugin-agent']['user'] do
   gid    node['newrelic-ng']['plugin-agent']['group']
-  home   '/'
-  shell  '/bin/false'
+  shell  '/bin/sh'
   system true
 end
 

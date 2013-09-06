@@ -44,6 +44,7 @@ suites:
 
 - name: generic-agent-default
   run_list:
+  - recipe[ruby::1.9.1]
   - recipe[minitest-handler]
   - recipe[newrelic-ng::generic-agent-default]
   attributes:

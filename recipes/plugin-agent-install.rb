@@ -32,7 +32,7 @@ group node['newrelic-ng']['plugin-agent']['group'] do
   system true
 end
 
-user node['newrelic-ng']['plugin-agent']['owner'] do
+user node['newrelic-ng']['plugin-agent']['user'] do
   gid    node['newrelic-ng']['plugin-agent']['group']
   home   '/'
   shell  '/bin/false'
@@ -45,7 +45,7 @@ end
   node['newrelic-ng']['plugin-agent']['logfile'] ].each do |dir|
 
   directory ::File.dirname(dir) do
-    owner node['newrelic-ng']['plugin-agent']['owner']
+    owner node['newrelic-ng']['plugin-agent']['user']
     group node['newrelic-ng']['plugin-agent']['group']
     mode  00755
   end

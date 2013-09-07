@@ -28,13 +28,6 @@ def install_agent
   package 'gzip'  if new_resource.source  =~ /\.(tgz|gz)$/
   package 'bzip2' if new_resource.source  =~ /\.bz2$/
 
-  newrelic_ng_user 'default' do
-    name   new_resource.name
-    group  new_resource.group
-    shell  new_resource.shell
-    system new_resource.system
-  end
-
   target = "#{new_resource.target_dir}/#{new_resource.name}"
 
   directory target do

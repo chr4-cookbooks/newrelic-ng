@@ -19,19 +19,24 @@
 #
 
 action :create do
-  group new_resource.group do
+  r = group new_resource.group do
     system new_resource.system
   end
+  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 
   # we need a shell, because we are using 'su' later to start the daemon
-  user new_resource.name do
+  r = user new_resource.name do
     gid    new_resource.group
     shell  new_resource.shell
     system new_resource.system
   end
+  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 end
 
 action :delete do
-  group(new_resource.group) { action :delete }
-  user(new_resource.name) { action :delete }
+  r = group(new_resource.group) { action :delete }
+  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
+
+  r = user(new_resource.name) { action :delete }
+  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 end

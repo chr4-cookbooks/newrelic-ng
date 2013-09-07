@@ -39,7 +39,7 @@ check_config() {
 
 check_pid() {
   if [ ! -d /var/run/newrelic ]; then
-    install -m 777 -o <%= @user %> -g <%= @group %> -d /var/run/newrelic
+    install -m 777 -o <%= @user %> -g <%= @group %> -d /var/run/newrelic
     log_action_msg "PID directory was not found and created" || true
   fi;
 }

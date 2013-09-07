@@ -47,9 +47,9 @@ end
 end
 
 init_script_template = value_for_platform_family(
-    ['centos','fedora','rhel','amazon', 'suse', 'scientific'] => 'plugin-agent-init-rhel.erb',
-    ['debian', 'ubuntu'] => 'plugin-agent-init-deb.erb'
-  )
+  rhel:   'plugin-agent-init-rhel.erb',
+  debian: 'plugin-agent-init-deb.erb'
+)
 
 # deploy initscript
 template '/etc/init.d/newrelic-plugin-agent' do

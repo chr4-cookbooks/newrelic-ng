@@ -56,5 +56,7 @@ template '/etc/init.d/newrelic-plugin-agent' do
   mode      00755
   cookbook  'newrelic-ng'
   source    init_script_template
-  variables :config_file => node['newrelic-ng']['plugin-agent']['config_file']
+  variables config_file: node['newrelic-ng']['plugin-agent']['config_file'],
+            user:        node['newrelic-ng']['user']['name'],
+            group:       node['newrelic-ng']['user']['group']
 end

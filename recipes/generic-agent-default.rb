@@ -19,6 +19,13 @@
 #
 
 node['newrelic-ng']['generic-agent']['agents'].each do |name, keys|
+
+  newrelic_ng_user node['newrelic-ng']['user']['name'] do
+    group node['newrelic-ng']['user']['group']
+    shell node['newrelic-ng']['user']['shell']
+    system node['newrelic-ng']['user']['system']
+  end
+
   newrelic_ng_generic_agent node['newrelic-ng']['license_key'] do
     name   name
     source keys[:source]

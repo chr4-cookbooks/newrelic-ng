@@ -18,6 +18,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+newrelic_ng_user node['newrelic-ng']['user']['name'] do
+  group node['newrelic-ng']['user']['group']
+  shell node['newrelic-ng']['user']['shell']
+  system node['newrelic-ng']['user']['system']
+end
+
 # a compiler is required for building some of the python modules the agent requires
 include_recipe 'build-essential'
 include_recipe 'python'
@@ -25,13 +31,6 @@ include_recipe 'python'
 python_pip 'newrelic-plugin-agent' do
   package_name node['newrelic-ng']['plugin-agent']['pip_package']
   action :install
-end
-
-newrelic_ng_user 'default' do
-  name   node['newrelic-ng']['user']['name']
-  group  node['newrelic-ng']['user']['group']
-  shell  node['newrelic-ng']['user']['shell']
-  system node['newrelic-ng']['user']['system']
 end
 
 # create config/run/log directories

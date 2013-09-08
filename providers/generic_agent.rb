@@ -29,7 +29,7 @@ def install_agent
   package 'bzip2' if new_resource.source  =~ /\.bz2$/
 
   newrelic_ng_user 'default' do
-    name   new_resource.name
+    name   new_resource.owner
     group  new_resource.group
     shell  new_resource.shell
     system new_resource.system

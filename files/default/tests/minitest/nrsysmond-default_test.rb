@@ -27,15 +27,17 @@ describe 'newrelic-ng::nrsysmond-default' do
     package('newrelic-sysmond').must_be_installed
   end
 
-  it 'must set license key' do
+  it 'sets license key' do
     file(node['newrelic-ng']['nrsysmond']['config_file']).must_include('TESTKEY_NRSYSMOND')
   end
 
-  it 'service newrelic-sysmond must be enabled' do
+  it 'starts newrelic-sysmond service' do
     # service status doesn't work, so grepping process table instead
     cmd = shell_out('ps aux |grep -v grep |grep -q rsysmond')
     cmd.exitstatus.to_s.must_include('0')
+  end
 
+  it 'enables ewrelic-sysmond service' do
     service('newrelic-sysmond').must_be_enabled
   end
 end

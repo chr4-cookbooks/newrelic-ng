@@ -27,15 +27,17 @@ describe 'newrelic-ng::plugin-agent-default' do
     file(which('newrelic_plugin_agent')).must_exist
   end
 
-  it 'must set license key' do
+  it 'sets license key' do
     file(node['newrelic-ng']['plugin-agent']['config_file']).must_include('TESTKEY_PLUGIN_AGENT')
   end
 
-  it 'service newrelic-plugin-agent must be enabled' do
+  it 'starts newrelic-plugin-agent service' do
     # we need to wait for a bit till service comes up
     cmd = shell_out('sleep 3; /etc/init.d/newrelic-plugin-agent status')
     cmd.exitstatus.to_s.must_include('0')
+  end
 
+  it 'enables newrelic-plugin-agent service' do
     service('newrelic-plugin-agent').must_be_enabled
   end
 end

@@ -18,10 +18,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-node['newrelic-ng']['generic-agent']['agents'].each do |name, keys|
+node['newrelic-ng']['generic-agent']['agents'].each do |plugin_name, keys|
   newrelic_ng_generic_agent node['newrelic-ng']['license_key'] do
-    name   name
-    source keys[:source]
-    config keys[:config]
+    plugin_name plugin_name
+    source      keys[:source]
+    config      keys[:config]
   end
 end

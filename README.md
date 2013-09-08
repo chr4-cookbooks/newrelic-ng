@@ -226,7 +226,7 @@ Example:
 
 ```ruby
 newrelic_ng_generic_agent 'MY_LICENSE_KEY' do
-  name   'nginx_status_agent'
+  plugin_name 'nginx_status_agent'
   source 'http://nginx.com/download/newrelic/newrelic_nginx_agent.tar.gz'
   config <<-EOS
 - instance_name: localhost
@@ -237,7 +237,7 @@ end
 
 ```ruby
 newrelic_ng_generic_agent 'MY_LICENSE_KEY' do
-  name   'sidekiq_status_agent'
+  plugin_name 'sidekiq_status_agent'
   source 'https://github.com/eksoverzero/newrelic_sidekiq_agent/archive/V2.0.tar.gz'
   config <<-EOS
 - instance_name: "App name"

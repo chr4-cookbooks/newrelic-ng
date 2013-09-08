@@ -22,7 +22,7 @@ actions        :install_and_configure, :install, :configure
 default_action :install_and_configure
 
 attribute :license_key, kind_of: String, name_attribute: true
-attribute :name,        kind_of: String, required: true
+attribute :plugin_name, kind_of: String, required: true
 attribute :source,      kind_of: String, required: true
 attribute :config,      kind_of: String, required: true
 attribute :target_dir,  kind_of: String, default: node['newrelic-ng']['generic-agent']['target_dir']

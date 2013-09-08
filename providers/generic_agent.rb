@@ -21,7 +21,7 @@
 def install_agent
   # we need to make sure we have a unique name.
   # bundler might be installed already in e.g. the chruby/rvm environment
-  gem_package "bundler (#{new_resource.name})" do
+  gem_package "bundler (#{new_resource.plugin_name})" do
     package_name 'bundler'
   end
 
@@ -35,21 +35,21 @@ def install_agent
     system new_resource.system
   end
 
-  target = "#{new_resource.target_dir}/#{new_resource.name}"
+  target = "#{new_resource.target_dir}/#{new_resource.plugin_name}"
 
   directory target do
     mode      00755
     recursive true
   end
 
-  daemon = "#{new_resource.target_dir}/#{new_resource.name}/newrelic_#{new_resource.name.split('_').first}_agent.daemon"
+  daemon = "#{new_resource.target_dir}/#{new_resource.plugin_name}/newrelic_#{new_resource.plugin_name.split('_').first}_agent.daemon"
 
   remote_file "#{Chef::Config[:file_cache_path]}/#{::File.basename(new_resource.source)}" do
     source   new_resource.source
     action   :create_if_missing
   end
 
-  execute "extract_#{new_resource.name}" do
+  execute "extract_#{new_resource.plugin_name}" do
     command "tar --strip-components=1 -xvzf #{::File.basename(new_resource.source)} -C #{target}" if new_resource.source  =~ /\.(tgz|gz)$/
     command "tar --strip-components=1 -xvjf #{::File.basename(new_resource.source)} -C #{target}" if new_resource.source  =~ /\.bz2$/
 
@@ -57,19 +57,19 @@ def install_agent
     not_if { ::File.exists?(daemon) }
   end
 
-  execute "bundle_install_#{new_resource.name}" do
+  execute "bundle_install_#{new_resource.plugin_name}" do
     command 'bundle install'
     cwd     target
   end
 
-  execute "chown_#{new_resource.name}" do
+  execute "chown_#{new_resource.plugin_name}" do
     command "chown -R #{new_resource.owner}:#{new_resource.group} #{target}"
   end
 end
 
 
 def configure_agent
-  config_file = "#{new_resource.target_dir}/#{new_resource.name}/config/newrelic_plugin.yml"
+  config_file = "#{new_resource.target_dir}/#{new_resource.plugin_name}/config/newrelic_plugin.yml"
 
   r = template config_file do
     owner     new_resource.owner
@@ -78,14 +78,14 @@ def configure_agent
     source    'generic-agent.yml.erb'
     cookbook  'newrelic-ng'
     variables license_key: new_resource.license_key,
-              name:        new_resource.name,
+              plugin_name: new_resource.plugin_name,
               config:      new_resource.config
   end
   new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 
-  daemon = "#{new_resource.target_dir}/#{new_resource.name}/newrelic_#{new_resource.name.split('_').first}_agent.daemon"
+  daemon = "#{new_resource.target_dir}/#{new_resource.plugin_name}/newrelic_#{new_resource.plugin_name.split('_').first}_agent.daemon"
 
-  service "newrelic_plugin_#{new_resource.name}" do
+  service "newrelic_plugin_#{new_resource.plugin_name}" do
     supports        status: true
     start_command   "su #{new_resource.owner} -c '#{daemon} start'"
     stop_command    "su #{new_resource.owner} -c '#{daemon} stop'"

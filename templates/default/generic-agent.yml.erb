@@ -10,7 +10,7 @@ newrelic:
 # Agent Configuration, describe your nginx instances here
 #
 agents:
-  <%= @name %>:
+  <%= @plugin_name %>:
     <% @config.each_line do |line| %>
     <%= line.chomp %>
     <% end -%>

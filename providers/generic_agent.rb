@@ -86,6 +86,7 @@ def configure_agent
   daemon = "#{new_resource.target_dir}/#{new_resource.plugin_name}/newrelic_#{new_resource.plugin_name.split('_').first}_agent.daemon"
 
   service "newrelic_plugin_#{new_resource.plugin_name}" do
+    provider        Chef::Provider::Service::Simple
     supports        status: true
     start_command   "su #{new_resource.owner} -c '#{daemon} start'"
     stop_command    "su #{new_resource.owner} -c '#{daemon} stop'"

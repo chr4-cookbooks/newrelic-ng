@@ -18,4 +18,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe 'newrelic-ng::server-monitoring-default'
+include_recipe 'newrelic-ng::nrsysmond-default'

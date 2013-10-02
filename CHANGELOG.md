@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.3.2:
+
+* Fix default recipe
+
+## 0.3.1:
+
+* Several small bugfixes, thanks to Cameron Johnston!
+
 ## 0.3.0:
 
 * Adds support for generic newrelic agents (e.g. newrelic_nginx_agent, newrelic_sidekiq_agent)

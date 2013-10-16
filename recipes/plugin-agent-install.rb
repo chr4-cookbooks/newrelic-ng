@@ -27,6 +27,14 @@ python_pip 'newrelic-plugin-agent' do
   action :install
 end
 
+# recent versions of plugin_agent require the following packages
+# to be installed to automatically resolve libraries needed.
+# install everything we might need
+python_pip 'newrelic_plugin_agent[mongodb]'
+python_pip 'newrelic_plugin_agent[pgbouncer]'
+python_pip 'newrelic_plugin_agent[postgresql]'
+
+
 newrelic_ng_user 'default' do
   name   node['newrelic-ng']['user']['name']
   group  node['newrelic-ng']['user']['group']

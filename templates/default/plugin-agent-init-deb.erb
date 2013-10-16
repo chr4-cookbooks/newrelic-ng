@@ -71,7 +71,7 @@ case "$1" in
     log_daemon_msg "Stopping $DESC" "$NAME" || true
     check_daemon
 
-    if start-stop-daemon --oknodo --stop --pidfile $PIDFILE; then
+    if start-stop-daemon --oknodo --stop --pidfile $PIDFILE --retry=TERM/10/KILL/5; then
       log_end_msg 0 || true
     else
       log_end_msg 1 || false

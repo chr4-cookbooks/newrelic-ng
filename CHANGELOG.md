@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.3.4:
+
+* Ensure plugin-agent dependencies have their dependencies installed
+
 ## 0.3.3:
 
 * Install plugin-agent dependencies automatically

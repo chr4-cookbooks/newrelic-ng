@@ -54,6 +54,9 @@ suites:
   attributes:
     newrelic-ng:
       license_key: TESTKEY_PLUGIN_AGENT
+      service_config: >
+        postgresql:
+          host: localhost
 
 - name: generic-agent-default
   run_list:

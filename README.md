@@ -7,7 +7,7 @@ This cookbook provides LWRPs and recipes to install and configure different moni
 * Generic ruby newrelic agents like
   * [newrelic_sidekiq_agent](https://github.com/eksoverzero/newrelic_sidekiq_agent)
   * [newrelic_nginx_agent](https://rpm.newrelic.com/accounts/29043/plugins/directory/13)
-  * Should work with all ruby newrelic agents that are using config/newrelic_plugin.yml configuration file and newrelic_[NAME]_agent.daemon
+  * Should work with all ruby newrelic agents that are using `config/newrelic_plugin.yml` configuration file and `newrelic_[NAME]_agent.daemon`
 
 This cookbook requires Chef 11 or later.
 
@@ -33,7 +33,7 @@ For a complete list of attributes, please see [here](https://github.com/flinc-ch
 
 ### plugin-agent
 
-You can set your Newrelic license key (note: this one is usually different than the one for server monitoring), as well as other options in the following attribute (default values shown below)
+You can set your New Relic license key, as well as other options in the following attribute (default values shown below)
 
 ```ruby
 node['newrelic-ng']['license_key'] = 'CHANGE_ME'
@@ -42,13 +42,13 @@ node['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic_plu
 node['newrelic-ng']['plugin-agent']['logfile'] = '#{node['newrelic-ng']['log_path']}/newrelic_plugin_agent.log'
 ```
 
-Set the pip package to install. Defaults to 'newrelic-plugin-agent'. You can set it e.g. to your github fork
+Set the pip package to install. Defaults to 'newrelic-plugin-agent'. You can set it e.g. to your GitHub fork
 
 ```ruby
 node.default['newrelic']['plugin-agent']['pip_package'] = 'git+git://github.com/chr4/newrelic-plugin-agent.git@fix-postgres-9.2'
 ```
 
-For configuring your services, you need to insert a YAML string into the service_config attribute
+For configuring your services, you need to insert a YAML string into the `service_config` attribute
 
 ```ruby
 node['newrelic-ng']['plugin-agent']['service_config'] = <<-EOS
@@ -134,7 +134,7 @@ To use the recipes, add the following to your metadata.rb
 
 ## Providers
 
-To use the providers, add the following to your metadata.rb
+To use the providers, add the following to your `metadata.rb`
 
 ```ruby
 depends 'newrelic-ng'
@@ -142,7 +142,7 @@ depends 'newrelic-ng'
 
 ### newrelic_ng_nrsysmond
 
-When nrsysmond is installed (e.g. using the newrelic-ng::nrsysmond-install recipe), you can configure it using the LWRP.
+When nrsysmond is installed (e.g. using the `newrelic-ng::nrsysmond-install` recipe), you can configure it using the LWRP.
 
 ```ruby
 newrelic_ng_nrsysmond 'YOUR_LICENSE_KEY'
@@ -179,7 +179,7 @@ end
 
 ### newrelic_ng_plugin_agent
 
-When the plugin-agent is installed (e.g. using the newrelic-ng::plugin-agent-install recipe), you can configure it using the LWRP.
+When the plugin-agent is installed (e.g. using the `newrelic-ng::plugin-agent-install` recipe), you can configure it using the LWRP.
 
 ```ruby
 newrelic_ng_plugin_agent 'YOUR_LICENSE_KEY'
@@ -220,7 +220,7 @@ end
 
 ### newrelic_ng_generic_agent
 
-You can install and configure generic ruby newrelic agents also via this LWRPs. For more information, see attributes and recipes section above.
+You can install and configure generic Ruby New Relic agents also via this LWRPs. For more information, see attributes and recipes section above.
 
 Example:
 
@@ -270,10 +270,10 @@ e.g.
 
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
-3. Write you change
+3. Write your change(s)
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+6. Submit a Pull Request using GitHub
 
 # License and Authors
 

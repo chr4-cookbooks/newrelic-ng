@@ -19,6 +19,23 @@
 #
 
 action :configure do
+
+  # postgresql and pgbouner need pg_config
+  if new_resource.service_config.include? 'postgresql:' or
+     new_resource.service_config.include? 'pgbouncer:'
+
+    # for the `pg_config` python module to install properly, we need one of these packages
+    # see stackoverflow.com/a/12037133/133479 for details
+    package 'libpq-dev'        if node['platform_family'] == 'debian'
+    package 'postgresql-devel' if node['platform_family'] == 'rhel'
+  end
+
+  # recent versions of plugin_agent can automatically resolv libraries needed
+  python_pip 'newrelic_plugin_agent[mongodb]'    if new_resource.service_config.include? 'mongodb:'
+  python_pip 'newrelic_plugin_agent[pgbouncer]'  if new_resource.service_config.include? 'pgbouncer:'
+  python_pip 'newrelic_plugin_agent[postgresql]' if new_resource.service_config.include? 'postgresql:'
+
+
   r = template new_resource.config_file do
     cookbook  new_resource.cookbook
     source    new_resource.source

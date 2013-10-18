@@ -22,30 +22,10 @@
 include_recipe 'build-essential'
 include_recipe 'python'
 
-# for the `pg_config` python module to install properly, we need one of these packages
-# see stackoverflow.com/a/12037133/133479 for details
-if node['platform_family'] == 'debian'
-  package "libpq-dev" do
-    action :install
-  end
-else
-  package "postgresql-devel" do
-    action :install
-  end
-end
-
 python_pip 'newrelic-plugin-agent' do
   package_name node['newrelic-ng']['plugin-agent']['pip_package']
   action :install
 end
-
-# recent versions of plugin_agent require the following packages
-# to be installed to automatically resolve libraries needed.
-# install everything we might need
-python_pip 'newrelic_plugin_agent[mongodb]'
-python_pip 'newrelic_plugin_agent[pgbouncer]'
-python_pip 'newrelic_plugin_agent[postgresql]'
-
 
 newrelic_ng_user 'default' do
   name   node['newrelic-ng']['user']['name']

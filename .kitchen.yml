@@ -83,3 +83,12 @@ suites:
               - instance_name: sidekiq_agent_test
                 uri: redis://localhost:6379
                 namespace: namespace
+
+- name: php-agent-default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[apache2]
+  - recipe[newrelic-ng::php-agent-default]
+  attributes:
+    newrelic-ng:
+      license_key: TESTKEY_PHP_AGENT

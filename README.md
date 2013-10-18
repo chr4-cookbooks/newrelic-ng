@@ -8,6 +8,7 @@ This cookbook provides LWRPs and recipes to install and configure different moni
   * [newrelic_sidekiq_agent](https://github.com/eksoverzero/newrelic_sidekiq_agent)
   * [newrelic_nginx_agent](https://rpm.newrelic.com/accounts/29043/plugins/directory/13)
   * Should work with all ruby newrelic agents that are using `config/newrelic_plugin.yml` configuration file and `newrelic_[NAME]_agent.daemon`
+* PHP Agent
 
 This cookbook requires Chef 11 or later.
 
@@ -91,6 +92,69 @@ EOS
 }
 ```
 
+### app-monitoring
+
+These are used by the PHP Agent, and potentially could be used by the Java Agent & the Python Agent.
+
+You’ll need to set the license key (shared amongst all the agents & the system monitor):
+
+```
+node['newrelic-ng']['license_key'] = 'CHANGE_ME'
+```
+
+Additionally, you have:
+
+#### BASIC
+
+* `node['newrelic-ng']['app_monitoring']['php-agent']['config_file']` – The path to the PHP agent config file; defaults to `#{node['php']['ext_conf_dir']}/newrelic.ini`
+* `node['newrelic-ng']['app_monitoring']['php-agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
+* `node['newrelic-ng']['app_monitoring']['php-agent']['server_service_name']` - The web server service name, defaults to "apache2"
+
+
+#### ADVANCED
+
+These are not namespaced to `php-agent`, as they could later be shared amongst the Python agent, and the other non-Ruby-like agents.
+
+[New Relic’s PHP agent settings docs](https://docs.newrelic.com/docs/php/php-agent-phpini-settings) contain more details on these settings.
+
+* `node['newrelic-ng']['app_monitoring']['enabled']`
+* `node['newrelic-ng']['app_monitoring']['logfile']`
+* `node['newrelic-ng']['app_monitoring']['loglevel']`
+* `node['newrelic-ng']['app_monitoring']['appname']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['config_file']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['upgrade_file']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['logfile']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['loglevel']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['port']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['max_threads']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['ssl']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['proxy']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['pidfile']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['location']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['collector_host']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['dont_launch']`
+* `node['newrelic-ng']['app_monitoring']['capture_params']`
+* `node['newrelic-ng']['app_monitoring']['ignored_params']`
+* `node['newrelic-ng']['app_monitoring']['error_collector']['enable']`
+* `node['newrelic-ng']['app_monitoring']['error_collector']['record_database_errors']`
+* `node['newrelic-ng']['app_monitoring']['error_collector']['prioritize_api_errors']`
+* `node['newrelic-ng']['app_monitoring']['browser_monitoring']['auto_instrument']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['enabled']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['threshold']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['detail']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['slow_sql']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['stack_trace_threshold']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['explain_enabled']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['explain_threshold']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['record_sql']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['custom']`
+* `node['newrelic-ng']['app_monitoring']['framework']`
+* `node['newrelic-ng']['app_monitoring']['webtransaction']['name']['remove_trailing_path']`
+* `node['newrelic-ng']['app_monitoring']['webtransaction']['name']['functions']`
+* `node['newrelic-ng']['app_monitoring']['webtransaction']['name']['files']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['auditlog']`
+* `node['newrelic-ng']['app_monitoring']['analytics']['events']['enabled']`
+
 ## Recipes
 
 To use the recipes, add the following to your metadata.rb
@@ -130,6 +194,14 @@ To use the recipes, add the following to your metadata.rb
 ### newrelic-repository
 
 * Sets up the Newrelic apt/yum repository
+
+### php-agent-default
+
+* Install PHP (via the [`php` cookbook](http://community.opscode.com/cookbooks/php), newrelic-php5
+* Run New Relic install script
+* Set up New Relic daemon according to `startup_mode` attribute:
+    * Agent mode (i.e., no daemon)
+    * External (i.e., daemon mode)
 
 
 ## Providers

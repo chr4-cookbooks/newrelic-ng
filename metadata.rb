@@ -8,6 +8,8 @@ version          '0.3.4'
 depends          'apt'
 depends          'build-essential'
 depends          'python'
+depends          'php'
+depends          'apache2'
 
 %w{ ubuntu debian redhat centos amazon suse scientific }.each do |os|
   supports os

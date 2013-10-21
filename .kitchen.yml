@@ -58,6 +58,9 @@ suites:
         service_config: >
           postgresql:
             host: localhost
+            port: 5432
+            dbname: postgres
+            user: newrelic
 
 - name: generic-agent-default
   run_list:

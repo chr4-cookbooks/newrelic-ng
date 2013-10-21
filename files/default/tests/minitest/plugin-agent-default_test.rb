@@ -23,6 +23,16 @@ require File.expand_path('../support/helpers', __FILE__)
 describe 'newrelic-ng::plugin-agent-default' do
   include Helpers::TestHelper
 
+  it 'installs postgresql development package' do
+    package('libpq-dev').must_be_installed        if node['platform_family'] == 'debian'
+    package('postgresql-devel').must_be_installed if node['platform_family'] == 'rhel'
+  end
+
+  it 'installs python dependencies' do
+    cmd = shell_out('pip list |grep -q psycopg2')
+    cmd.exitstatus.to_s.must_include('0')
+  end
+
   it 'installs plugin-agent' do
     file(which('newrelic_plugin_agent')).must_exist
   end
@@ -33,7 +43,7 @@ describe 'newrelic-ng::plugin-agent-default' do
 
   it 'starts newrelic-plugin-agent service' do
     # we need to wait for a bit till service comes up
-    cmd = shell_out('sleep 3; /etc/init.d/newrelic-plugin-agent status')
+    cmd = shell_out('sleep 3; service newrelic-plugin-agent status')
     cmd.exitstatus.to_s.must_include('0')
   end
 

@@ -17,6 +17,7 @@ CONFIG=<%= @config_file %>
 DAEMON=/usr/local/bin/newrelic_plugin_agent
 DAEMON_OPTS="-c $CONFIG"
 DESC="New Relic Plugin Agent"
+PIDFILE=$(sed -n -e 's/^[ ]*pidfile[ ]*:[ ]*//p' -e 's/[ ]*$//' $CONFIG)
 
 # define LSB log_* functions.
 . /lib/lsb/init-functions
@@ -38,13 +39,11 @@ check_config() {
 }
 
 check_pid() {
-  if [ ! -d /var/run/newrelic ]; then
-    install -m 777 -o <%= @user %> -g <%= @group %> -d /var/run/newrelic
+  if [ ! -d $(dirname $PIDFILE) ]; then
+    install -m 777 -o <%= @user %> -g <%= @group %> -d $(dirname $PIDFILE)
     log_action_msg "PID directory was not found and created" || true
   fi;
 }
-
-PIDFILE=$(sed -n -e 's/^[ ]*pidfile[ ]*:[ ]*//p' -e 's/[ ]*$//' $CONFIG)
 
 export PATH="${PATH:+$PATH:}/usr/sbin:/sbin/:usr/local/sbin:/usr/local/bin"
 

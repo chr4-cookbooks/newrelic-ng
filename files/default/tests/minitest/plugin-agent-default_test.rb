@@ -43,7 +43,7 @@ describe 'newrelic-ng::plugin-agent-default' do
 
   it 'starts newrelic-plugin-agent service' do
     # we need to wait for a bit till service comes up
-    cmd = shell_out('sleep 3; /etc/init.d/newrelic-plugin-agent status')
+    cmd = shell_out('sleep 3; service newrelic-plugin-agent status')
     cmd.exitstatus.to_s.must_include('0')
   end
 

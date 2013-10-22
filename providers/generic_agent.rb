@@ -90,7 +90,10 @@ def configure_agent
     supports        status: true
     start_command   "su #{new_resource.owner} -c '#{daemon} start'"
     stop_command    "su #{new_resource.owner} -c '#{daemon} stop'"
-    status_command  "su #{new_resource.owner} -c '#{daemon} status'"
+    restart_command "su #{new_resource.owner} -c '#{daemon} restart'"
+
+    # status always returns 0, so we're grepping for pid as a workaround
+    status_command  "su #{new_resource.owner} -c '#{daemon} status |grep -q pid'"
 
     subscribes      :restart, "template[#{config_file}]"
     action          :start

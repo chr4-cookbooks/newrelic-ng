@@ -7,7 +7,8 @@ This cookbook provides LWRPs and recipes to install and configure different moni
 * Generic ruby newrelic agents like
   * [newrelic_sidekiq_agent](https://github.com/eksoverzero/newrelic_sidekiq_agent)
   * [newrelic_nginx_agent](https://rpm.newrelic.com/accounts/29043/plugins/directory/13)
-  * Should work with all ruby newrelic agents that are using config/newrelic_plugin.yml configuration file and newrelic_[NAME]_agent.daemon
+  * Should work with all ruby newrelic agents that are using `config/newrelic_plugin.yml` configuration file and `newrelic_[NAME]_agent.daemon`
+* PHP Agent
 
 This cookbook requires Chef 11 or later.
 
@@ -33,22 +34,22 @@ For a complete list of attributes, please see [here](https://github.com/flinc-ch
 
 ### plugin-agent
 
-You can set your Newrelic license key (note: this one is usually different than the one for server monitoring), as well as other options in the following attribute (default values shown below)
+You can set your New Relic license key, as well as other options in the following attribute (default values shown below)
 
 ```ruby
 node['newrelic-ng']['license_key'] = 'CHANGE_ME'
 node['newrelic-ng']['plugin-agent']['poll_interval'] = 60
 node['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic_plugin_agent.pid'
-node['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic_plugin_agent.log'
+node['newrelic-ng']['plugin-agent']['logfile'] = '#{node['newrelic-ng']['log_path']}/newrelic_plugin_agent.log'
 ```
 
-Set the pip package to install. Defaults to 'newrelic-plugin-agent'. You can set it e.g. to your github fork
+Set the pip package to install. Defaults to 'newrelic-plugin-agent'. You can set it e.g. to your GitHub fork
 
 ```ruby
 node.default['newrelic']['plugin-agent']['pip_package'] = 'git+git://github.com/chr4/newrelic-plugin-agent.git@fix-postgres-9.2'
 ```
 
-For configuring your services, you need to insert a YAML string into the service_config attribute
+For configuring your services, you need to insert a YAML string into the `service_config` attribute
 
 ```ruby
 node['newrelic-ng']['plugin-agent']['service_config'] = <<-EOS
@@ -91,6 +92,69 @@ EOS
 }
 ```
 
+### app-monitoring
+
+These are used by the PHP Agent, and potentially could be used by the Java Agent & the Python Agent.
+
+You’ll need to set the license key (shared amongst all the agents & the system monitor):
+
+```
+node['newrelic-ng']['license_key'] = 'CHANGE_ME'
+```
+
+Additionally, you have:
+
+#### BASIC
+
+* `node['newrelic-ng']['app_monitoring']['php-agent']['config_file']` – The path to the PHP agent config file; defaults to `#{node['php']['ext_conf_dir']}/newrelic.ini`
+* `node['newrelic-ng']['app_monitoring']['php-agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
+* `node['newrelic-ng']['app_monitoring']['php-agent']['server_service_name']` - The web server service name, defaults to "apache2"
+
+
+#### ADVANCED
+
+These are not namespaced to `php-agent`, as they could later be shared amongst the Python agent, and the other non-Ruby-like agents.
+
+[New Relic’s PHP agent settings docs](https://docs.newrelic.com/docs/php/php-agent-phpini-settings) contain more details on these settings.
+
+* `node['newrelic-ng']['app_monitoring']['enabled']`
+* `node['newrelic-ng']['app_monitoring']['logfile']`
+* `node['newrelic-ng']['app_monitoring']['loglevel']`
+* `node['newrelic-ng']['app_monitoring']['appname']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['config_file']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['upgrade_file']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['logfile']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['loglevel']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['port']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['max_threads']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['ssl']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['proxy']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['pidfile']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['location']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['collector_host']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['dont_launch']`
+* `node['newrelic-ng']['app_monitoring']['capture_params']`
+* `node['newrelic-ng']['app_monitoring']['ignored_params']`
+* `node['newrelic-ng']['app_monitoring']['error_collector']['enable']`
+* `node['newrelic-ng']['app_monitoring']['error_collector']['record_database_errors']`
+* `node['newrelic-ng']['app_monitoring']['error_collector']['prioritize_api_errors']`
+* `node['newrelic-ng']['app_monitoring']['browser_monitoring']['auto_instrument']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['enabled']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['threshold']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['detail']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['slow_sql']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['stack_trace_threshold']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['explain_enabled']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['explain_threshold']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['record_sql']`
+* `node['newrelic-ng']['app_monitoring']['transaction_tracer']['custom']`
+* `node['newrelic-ng']['app_monitoring']['framework']`
+* `node['newrelic-ng']['app_monitoring']['webtransaction']['name']['remove_trailing_path']`
+* `node['newrelic-ng']['app_monitoring']['webtransaction']['name']['functions']`
+* `node['newrelic-ng']['app_monitoring']['webtransaction']['name']['files']`
+* `node['newrelic-ng']['app_monitoring']['daemon']['auditlog']`
+* `node['newrelic-ng']['app_monitoring']['analytics']['events']['enabled']`
+
 ## Recipes
 
 To use the recipes, add the following to your metadata.rb
@@ -131,10 +195,18 @@ To use the recipes, add the following to your metadata.rb
 
 * Sets up the Newrelic apt/yum repository
 
+### php-agent-default
+
+* Install PHP (via the [`php` cookbook](http://community.opscode.com/cookbooks/php), newrelic-php5
+* Run New Relic install script
+* Set up New Relic daemon according to `startup_mode` attribute:
+    * Agent mode (i.e., no daemon)
+    * External (i.e., daemon mode)
+
 
 ## Providers
 
-To use the providers, add the following to your metadata.rb
+To use the providers, add the following to your `metadata.rb`
 
 ```ruby
 depends 'newrelic-ng'
@@ -142,7 +214,7 @@ depends 'newrelic-ng'
 
 ### newrelic_ng_nrsysmond
 
-When nrsysmond is installed (e.g. using the newrelic-ng::nrsysmond-install recipe), you can configure it using the LWRP.
+When nrsysmond is installed (e.g. using the `newrelic-ng::nrsysmond-install` recipe), you can configure it using the LWRP.
 
 ```ruby
 newrelic_ng_nrsysmond 'YOUR_LICENSE_KEY'
@@ -179,7 +251,7 @@ end
 
 ### newrelic_ng_plugin_agent
 
-When the plugin-agent is installed (e.g. using the newrelic-ng::plugin-agent-install recipe), you can configure it using the LWRP.
+When the plugin-agent is installed (e.g. using the `newrelic-ng::plugin-agent-install` recipe), you can configure it using the LWRP.
 
 ```ruby
 newrelic_ng_plugin_agent 'YOUR_LICENSE_KEY'
@@ -220,7 +292,7 @@ end
 
 ### newrelic_ng_generic_agent
 
-You can install and configure generic ruby newrelic agents also via this LWRPs. For more information, see attributes and recipes section above.
+You can install and configure generic Ruby New Relic agents also via this LWRPs. For more information, see attributes and recipes section above.
 
 Example:
 
@@ -270,10 +342,10 @@ e.g.
 
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
-3. Write you change
+3. Write your change(s)
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+6. Submit a Pull Request using GitHub
 
 # License and Authors
 

@@ -20,6 +20,9 @@
 
 default['newrelic-ng']['license_key'] = 'CHANGE ME'
 
+default['newrelic-ng']['config_path'] = '/etc/newrelic'
+default['newrelic-ng']['log_path'] = '/var/log/newrelic'
+
 default['newrelic-ng']['user']['name']   = 'newrelic'
 default['newrelic-ng']['user']['group']  = 'newrelic'
 default['newrelic-ng']['user']['shell']  = '/bin/sh'

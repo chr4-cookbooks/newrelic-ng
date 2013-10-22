@@ -21,7 +21,7 @@
 default['newrelic-ng']['nrsysmond']['config'] = {
   license_key: node['newrelic-ng']['license_key'],
   loglevel: 'info',
-  logfile: '/var/log/newrelic/nrsysmond.log',
+  logfile: "#{node['newrelic-ng']['log_path']}/nrsysmond.log",
   proxy: nil,
   ssl: true,
   ssl_ca_bundle: nil,
@@ -31,7 +31,7 @@ default['newrelic-ng']['nrsysmond']['config'] = {
   timeout: nil,
 }
 
-default['newrelic-ng']['nrsysmond']['config_file'] = '/etc/newrelic/nrsysmond.cfg'
+default['newrelic-ng']['nrsysmond']['config_file'] = "#{node['newrelic-ng']['config_path']}/nrsysmond.cfg"
 default['newrelic-ng']['nrsysmond']['mode'] = 00640
 
 default['newrelic-ng']['nrsysmond']['rpm']['repo']['url'] =  "http://download.newrelic.com/pub/newrelic/el5/#{node['newrelic-ng']['arch']}/newrelic-repo-5-3.noarch.rpm"

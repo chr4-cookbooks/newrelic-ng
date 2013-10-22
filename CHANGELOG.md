@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.3.4:
+
+* Add workaround for newrelic_generic_agent, was not starting up properly, due to bug in their status command
+
 ## 0.3.3:
 
 * Install plugin-agent dependencies automatically

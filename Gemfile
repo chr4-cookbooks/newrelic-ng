@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf'
-gem 'test-kitchen', '~> 1.0.0.beta.3', :group => :integration
-gem 'kitchen-vagrant', :group => :integration
+gem 'berkshelf', '~> 2.0'
+
+group :integration do
+  gem 'test-kitchen', '~> 1.0.0.beta'
+  gem 'kitchen-vagrant', '~> 0.11.1'
+end

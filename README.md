@@ -135,7 +135,7 @@ These are not namespaced to `php-agent`, as they could later be shared amongst t
 * `node['newrelic-ng']['app_monitoring']['daemon']['dont_launch']`
 * `node['newrelic-ng']['app_monitoring']['capture_params']`
 * `node['newrelic-ng']['app_monitoring']['ignored_params']`
-* `node['newrelic-ng']['app_monitoring']['error_collector']['enable']`
+* `node['newrelic-ng']['app_monitoring']['error_collector']['enabled']`
 * `node['newrelic-ng']['app_monitoring']['error_collector']['record_database_errors']`
 * `node['newrelic-ng']['app_monitoring']['error_collector']['prioritize_api_errors']`
 * `node['newrelic-ng']['app_monitoring']['browser_monitoring']['auto_instrument']`

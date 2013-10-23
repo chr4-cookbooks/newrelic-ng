@@ -40,7 +40,7 @@ You can set your New Relic license key, as well as other options in the followin
 node['newrelic-ng']['license_key'] = 'CHANGE_ME'
 node['newrelic-ng']['plugin-agent']['poll_interval'] = 60
 node['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic_plugin_agent.pid'
-node['newrelic-ng']['plugin-agent']['logfile'] = '#{node['newrelic-ng']['log_path']}/newrelic_plugin_agent.log'
+node['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic_plugin_agent.log'
 ```
 
 Set the pip package to install. Defaults to 'newrelic-plugin-agent'. You can set it e.g. to your GitHub fork

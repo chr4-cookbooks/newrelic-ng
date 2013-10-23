@@ -98,16 +98,20 @@ loglevel=<%= @daemon_loglevel %>
 
 #
 # Setting: port
-# Type   : Integer (1-65534)
-# Purpose: Sets the TCP port on which the daemon will listen for connections
-#          from agents (agents in this case includes Apache / php-fpm worker
-#          processes, the command line, or any other agent source). In order
-#          to use a port in the range 1-1023, the daemon must be started by
-#          the super-user. This is a fundamental OS limitation and not one
-#          imposed by the daemon itself.
-# Default: 33142
+# Type   : String or Integer (1-65534)
+# Purpose: Sets how the agent and daemon communicate. How this is set can impact
+#          performance. The default is to use a UNIX-domain socket located at
+#          /tmp/.newrelic.sock. If you want to use UNIX domain sockets then
+#          this value must begin with a "/". If you set this to an integer
+#          value in the range 1-65534, then this will instruct the daemon to
+#          listen on a normal TCP socket on the port specified. This may be
+#          easier to use if you are using a chroot environment.
+#          In order to use a port in the range 1-1023, the daemon must be
+#          started by the super-user. This is a fundamental OS limitation
+#          and not one imposed by the daemon itself.
+# Default: "/tmp/.newrelic.sock"
 <% if @daemon_port.nil? %>
-#port=33142
+#port="/tmp/.newrelic.sock"
 <% else %>
 port=<%= @daemon_port %>
 <% end %>
@@ -117,14 +121,10 @@ port=<%= @daemon_port %>
 # Type   : boolean
 # Purpose: If you prefer the daemon to use the secure HTTP (https) protocol
 #          when communicating with the New Relic collector servers, set this
-#          to true. Please note that in order for this to work the daemon must
-#          be able to find a Certificate Authority (CA) list. On startup the
-#          daemon will attempt to find such a list in the usual places, but
-#          you may need to use the ssl_ca_bundle or ssl_ca_path variables
-#          below.
-# Default: false
+#          to true.
+# Default: true (as of version 3.6)
 <% if @daemon_ssl.nil? %>
-#ssl=false
+#ssl=true
 <% else %>
 ssl=<%= @daemon_ssl %>
 <% end %>
@@ -148,36 +148,6 @@ ssl=<%= @daemon_ssl %>
 #proxy=
 <% else %>
 proxy=<%= @daemon_proxy %>
-<% end %>
-
-#
-# Setting: ssl_ca_bundle
-# Type   : string
-# Purpose: If you have the "ssl" option above enabled, and the daemon cannot
-#          find a suitable Certificate Authority (CA) list, this is one of the
-#          options you can use to point it to the CA list to use. If your SSL
-#          installation uses a "bundle" - i.e. a single file which contains a
-#          list of CA's - then this option should point to that bundle file.
-# Default: Looks for one of two files: /etc/pki/tls/certs/ca-bundle.crt or
-#          /etc/ssl/certs/ca-certificates.crt.
-#
-<% if @daemon_ssl_ca_bundle.nil? %>
-#ssl_ca_bundle=
-<% else %>
-ssl_ca_bundle=<%= @daemon_ssl_ca_bundle %>
-<% end %>
-
-#
-# Setting: ssl_ca_path
-# Type   : string
-# Purpose: See ssl_ca_bundle above. This option should be used if your SSL
-#          installation uses a sub-directory with a list of CA certificates.
-#          Set this variable to point to that directory.
-# Default: /etc/ssl/certs
-<% if @daemon_ssl_ca_path.nil? %>
-#ssl_ca_path=
-<% else %>
-ssl_ca_path=<%= @daemon_ssl_ca_path %>
 <% end %>
 
 #
@@ -211,3 +181,21 @@ max_threads=<%= @daemon_max_threads %>
 <% else %>
 collector_host=<%= @daemon_collector_host %>
 <% end %>
+#
+# Setting: auditlog
+# Type   : string
+# Purpose: Sets the name of a file to record all uncompressed, un-encoded
+#          content that is sent from your machine to the New Relic servers.
+#          This includes the full URL for each command along with the payload
+#          delivered with the command. This allows you to satisfy yourself
+#          that the agent is not sending any sensitive data to our servers.
+#          This file must be a different file to the logfile setting above.
+#          If you set it to the same name audit logging will be silently
+#          ignored.
+# Default: None
+<% if @daemon_auditlog.nil? %>
+#auditlog=/var/log/newrelic/audit.log
+<% else %>
+auditlog=<%= @daemon_auditlog %>
+<% end %>
+

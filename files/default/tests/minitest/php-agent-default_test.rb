@@ -27,11 +27,11 @@ describe 'newrelic-ng::php-agent-default' do
     package('newrelic-php5').must_be_installed
   end
 
-  it 'stops the New Relic daemon' do
-    service('newrelic-daemon').wont_be_running
+  it 'starts the New Relic daemon agent style' do
+    service('newrelic-daemon').must_be_running
   end
 
-  it 'disables the New Relic daemon' do
+  it 'disables the New Relic daemon from startup init' do
     service('newrelic-daemon').wont_be_enabled
   end
 

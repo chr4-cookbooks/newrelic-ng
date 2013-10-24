@@ -24,6 +24,13 @@ action :configure do
     supports status: true, start: true, stop: true, restart: true
   end
 
+  # ensure that the file #{new_resource.daemon_upgrade_file}
+  # does not exist if it does, move it aside (or remove it)
+  execute "newrelic-backup-key" do
+    command "mv #{new_resource.daemon_upgrade_file} #{new_resource.daemon_upgrade_file}.external"
+    only_if do ::File.exists?(new_resource.daemon_upgrade_file) end
+  end
+
   # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
   Chef::Log.info("newrelic-daemon startup mode: #{new_resource.startup_mode}")
 
@@ -43,13 +50,6 @@ action :configure do
       execute "newrelic-backup-cfg" do
         command "mv #{new_resource.daemon_config_file} #{new_resource.daemon_config_file}.external"
         only_if do ::File.exists?(new_resource.daemon_config_file) end
-      end
-
-      # ensure that the file #{new_resource.daemon_upgrade_file}
-      # does not exist if it does, move it aside (or remove it)
-      execute "newrelic-backup-key" do
-        command "mv #{new_resource.daemon_upgrade_file} #{new_resource.daemon_upgrade_file}.external"
-        only_if do ::File.exists?(new_resource.daemon_upgrade_file) end
       end
 
       # configure New Relic INI file and set the daemon related options

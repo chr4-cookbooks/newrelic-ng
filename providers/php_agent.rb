@@ -114,7 +114,7 @@ action :configure do
       # external startup mode
 
       # configure proxy daemon settings
-      r = template new_resource.config_file do
+      r = template new_resource.daemon_config_file do
         cookbook  new_resource.cookbook
         source    new_resource.source
         owner     new_resource.owner

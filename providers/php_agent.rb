@@ -20,12 +20,6 @@
 
 action :configure do
 
-  # service 'newrelic-plugin-agent' do
-  #   supports   status: true, restart: true
-  #   subscribes :restart, "template[#{new_resource.config_file}]"
-  #   action   [ :enable, :start ]
-  # end
-
   service "newrelic-daemon" do
     supports status: true, start: true, stop: true, restart: true
   end

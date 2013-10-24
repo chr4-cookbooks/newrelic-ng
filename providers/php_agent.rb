@@ -51,29 +51,11 @@ action :configure do
         command "mv #{new_resource.daemon_config_file} #{new_resource.daemon_config_file}.external"
         only_if do ::File.exists?(new_resource.daemon_config_file) end
       end
-
-      # configure New Relic INI file and set the daemon related options
-      # (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
-      # and restart the web server in order to pick up the new settings
-      r = template new_resource.config_file do
-        cookbook  new_resource.cookbook
-        source    new_resource.source
-        owner     new_resource.owner
-        group     new_resource.group
-        mode      new_resource.mode
-
-        variables config: new_resource
-
-        notifies :restart, "service[#{new_resource.server_service_name}]", :delayed
-      end
-
-      new_resource.updated_by_last_action(true) if r.updated_by_last_action?
-
     when "external"
       # external startup mode
 
       # configure proxy daemon settings
-      r = template new_resource.daemon_config_file do
+      daemon_config = template new_resource.daemon_config_file do
         cookbook  new_resource.cookbook
         source    new_resource.source
         owner     new_resource.owner
@@ -86,7 +68,7 @@ action :configure do
         notifies :restart, "service[#{new_resource.server_service_name}]", :delayed
       end
 
-      new_resource.updated_by_last_action(true) if r.updated_by_last_action?
+      new_resource.updated_by_last_action(true) if daemon_config.updated_by_last_action?
 
       service "newrelic-daemon" do
         # start the service if it's not running and enable it to start at system boot time
@@ -95,4 +77,22 @@ action :configure do
     else
       Chef::Application.fatal!("#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode.")
   end
+
+  # configure New Relic INI file and set the daemon related options
+  # (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
+  # and restart the web server in order to pick up the new settings
+  php_config = template new_resource.config_file do
+    cookbook  new_resource.cookbook
+    source    new_resource.source
+    owner     new_resource.owner
+    group     new_resource.group
+    mode      new_resource.mode
+
+    variables config: new_resource
+
+    notifies :restart, "service[#{new_resource.server_service_name}]", :delayed
+  end
+
+  new_resource.updated_by_last_action(true) if php_config.updated_by_last_action?
+
 end

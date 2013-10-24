@@ -62,42 +62,7 @@ action :configure do
         group     new_resource.group
         mode      new_resource.mode
 
-        variables license_key:                              new_resource.license_key,
-                  enabled:                                  new_resource.enabled,
-                  logfile:                                  new_resource.logfile,
-                  loglevel:                                 new_resource.loglevel,
-                  appname:                                  new_resource.appname,
-                  daemon_logfile:                           new_resource.daemon_logfile,
-                  daemon_loglevel:                          new_resource.daemon_loglevel,
-                  daemon_port:                              new_resource.daemon_port,
-                  daemon_max_threads:                       new_resource.daemon_max_threads,
-                  daemon_ssl:                               new_resource.daemon_ssl,
-                  daemon_proxy:                             new_resource.daemon_proxy,
-                  daemon_pidfile:                           new_resource.daemon_pidfile,
-                  daemon_location:                          new_resource.daemon_location,
-                  daemon_collector_host:                    new_resource.daemon_collector_host,
-                  daemon_dont_launch:                       new_resource.daemon_dont_launch,
-                  capture_params:                           new_resource.capture_params,
-                  ignored_params:                           new_resource.ignored_params,
-                  error_collector_enabled:                  new_resource.error_collector_enabled,
-                  error_collector_record_database_errors:   new_resource.error_collector_record_database_errors,
-                  error_collector_prioritize_api_errors:    new_resource.error_collector_prioritize_api_errors,
-                  browser_monitoring_auto_instrument:       new_resource.browser_monitoring_auto_instrument,
-                  transaction_tracer_enabled:               new_resource.transaction_tracer_enabled,
-                  transaction_tracer_threshold:             new_resource.transaction_tracer_threshold,
-                  transaction_tracer_detail:                new_resource.transaction_tracer_detail,
-                  transaction_tracer_slow_sql:              new_resource.transaction_tracer_slow_sql,
-                  transaction_tracer_stack_trace_threshold: new_resource.transaction_tracer_stack_trace_threshold,
-                  transaction_tracer_explain_enabled:       new_resource.transaction_tracer_explain_enabled,
-                  transaction_tracer_explain_threshold:     new_resource.transaction_tracer_explain_threshold,
-                  transaction_tracer_record_sql:            new_resource.transaction_tracer_record_sql,
-                  transaction_tracer_custom:                new_resource.transaction_tracer_custom,
-                  framework:                                new_resource.framework,
-                  webtransaction_name_remove_trailing_path: new_resource.webtransaction_name_remove_trailing_path,
-                  webtransaction_name_functions:            new_resource.webtransaction_name_functions,
-                  webtransaction_name_files:                new_resource.webtransaction_name_files,
-                  daemon_auditlog:                          new_resource.daemon_auditlog,
-                  analytics_events_enabled:                 new_resource.analytics_events_enabled
+        variables config: new_resource
 
         notifies :restart, "service[#{new_resource.server_service_name}]", :delayed
       end
@@ -115,14 +80,7 @@ action :configure do
         group     new_resource.group
         mode      new_resource.mode
 
-        variables daemon_pidfile:        new_resource.daemon_pidfile,
-                  daemon_logfile:        new_resource.daemon_logfile,
-                  daemon_loglevel:       new_resource.daemon_loglevel,
-                  daemon_port:           new_resource.daemon_port,
-                  daemon_ssl:            new_resource.daemon_ssl,
-                  daemon_max_threads:    new_resource.daemon_max_threads,
-                  daemon_collector_host: new_resource.daemon_collector_host,
-                  daemon_auditlog:       new_resource.daemon_auditlog
+        variables config: new_resource
 
         notifies :restart, "service[newrelic-daemon]", :immediately
         notifies :restart, "service[#{new_resource.server_service_name}]", :delayed

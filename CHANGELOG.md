@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.4.0:
+
+* Add support for php-agent, thanks to Jeff Byrnes!
+
 ## 0.3.4:
 
 * Add workaround for newrelic_generic_agent, was not starting up properly, due to bug in their status command

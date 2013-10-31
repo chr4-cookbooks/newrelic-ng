@@ -42,7 +42,7 @@ action :configure do
       service 'newrelic-daemon' do
         # stops the service if it's running and disables it from
         # starting at system boot time
-        action [:disable, :stop]
+        action [ :disable, :stop ]
       end
 
       # ensure that the file #{new_resource.daemon_config_file} does
@@ -72,7 +72,7 @@ action :configure do
 
       service 'newrelic-daemon' do
         # start the service if it's not running and enable it to start at system boot time
-        action   [ :enable, :start ]
+        action [ :enable, :start ]
       end
     else
       Chef::Application.fatal!("#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode.")

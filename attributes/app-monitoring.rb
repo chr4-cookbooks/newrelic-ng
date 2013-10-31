@@ -6,16 +6,16 @@
 #
 
 default['newrelic-ng']['app_monitoring']['php-agent']['config_file'] = "#{node['php']['ext_conf_dir']}/newrelic.ini"
-default['newrelic-ng']['app_monitoring']['php-agent']['startup_mode'] = "agent"
-default['newrelic-ng']['app_monitoring']['php-agent']['server_service_name'] = "apache2"
+default['newrelic-ng']['app_monitoring']['php-agent']['startup_mode'] = 'agent'
+default['newrelic-ng']['app_monitoring']['php-agent']['server_service_name'] = 'apache2'
 
 default['newrelic-ng']['app_monitoring']['enabled'] = nil
 default['newrelic-ng']['app_monitoring']['logfile'] = nil
 default['newrelic-ng']['app_monitoring']['loglevel'] = nil
 default['newrelic-ng']['app_monitoring']['appname'] = nil
-default['newrelic-ng']['app_monitoring']['daemon']['config_file'] = "/etc/newrelic/newrelic.cfg"
-default['newrelic-ng']['app_monitoring']['daemon']['upgrade_file'] = "/etc/newrelic/upgrade_please.key"
-default['newrelic-ng']['app_monitoring']['daemon']['logfile'] = "/var/log/newrelic/newrelic-daemon.log"
+default['newrelic-ng']['app_monitoring']['daemon']['config_file'] = '/etc/newrelic/newrelic.cfg'
+default['newrelic-ng']['app_monitoring']['daemon']['upgrade_file'] = '/etc/newrelic/upgrade_please.key'
+default['newrelic-ng']['app_monitoring']['daemon']['logfile'] = '/var/log/newrelic/newrelic-daemon.log'
 default['newrelic-ng']['app_monitoring']['daemon']['loglevel'] = nil
 default['newrelic-ng']['app_monitoring']['daemon']['port'] = nil
 default['newrelic-ng']['app_monitoring']['daemon']['max_threads'] = nil

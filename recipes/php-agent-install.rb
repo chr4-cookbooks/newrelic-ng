@@ -18,27 +18,27 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe "php"
-include_recipe "newrelic-ng::newrelic-repository"
+include_recipe 'php'
+include_recipe 'newrelic-ng::newrelic-repository'
 
 # An older version (3.0) had a bug in the init scripts that when it
 # shut down the daemon it would also kill dpkg as it was trying to upgrade
 # let's remove the old packages before continuing
-package "newrelic-php5" do
+package 'newrelic-php5' do
   action :remove
-  version "3.0.5.95"
+  version '3.0.5.95'
 end
 
 # run newrelic-install
 # waits until php agent is installed first
-execute "newrelic-install" do
-  command "newrelic-install install"
+execute 'newrelic-install' do
+  command 'newrelic-install install'
   action :nothing
   notifies :restart, "service[#{node['newrelic-ng']['app_monitoring']['php-agent']['server_service_name']}]", :delayed
 end
 
 # install/update latest php agent
-package "newrelic-php5" do
+package 'newrelic-php5' do
   action :upgrade
-  notifies :run, "execute[newrelic-install]", :immediately
+  notifies :run, 'execute[newrelic-install]', :immediately
 end

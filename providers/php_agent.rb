@@ -20,13 +20,13 @@
 
 action :configure do
 
-  service "newrelic-daemon" do
+  service 'newrelic-daemon' do
     supports status: true, start: true, stop: true, restart: true
   end
 
   # ensure that the file #{new_resource.daemon_upgrade_file}
   # does not exist if it does, move it aside (or remove it)
-  execute "newrelic-backup-key" do
+  execute 'newrelic-backup-key' do
     command "mv #{new_resource.daemon_upgrade_file} #{new_resource.daemon_upgrade_file}.external"
     only_if do ::File.exists?(new_resource.daemon_upgrade_file) end
   end
@@ -35,11 +35,11 @@ action :configure do
   Chef::Log.info("newrelic-daemon startup mode: #{new_resource.startup_mode}")
 
   case new_resource.startup_mode
-    when "agent"
+    when 'agent'
       # agent startup mode
 
       # ensure that the daemon isn't currently running
-      service "newrelic-daemon" do
+      service 'newrelic-daemon' do
         # stops the service if it's running and disables it from
         # starting at system boot time
         action [:disable, :stop]
@@ -47,11 +47,11 @@ action :configure do
 
       # ensure that the file #{new_resource.daemon_config_file} does
       # not exist if it does, move it aside (or remove it)
-      execute "newrelic-backup-cfg" do
+      execute 'newrelic-backup-cfg' do
         command "mv #{new_resource.daemon_config_file} #{new_resource.daemon_config_file}.external"
         only_if do ::File.exists?(new_resource.daemon_config_file) end
       end
-    when "external"
+    when 'external'
       # external startup mode
 
       # configure proxy daemon settings
@@ -70,7 +70,7 @@ action :configure do
 
       new_resource.updated_by_last_action(true) if daemon_config.updated_by_last_action?
 
-      service "newrelic-daemon" do
+      service 'newrelic-daemon' do
         # start the service if it's not running and enable it to start at system boot time
         action   [ :enable, :start ]
       end

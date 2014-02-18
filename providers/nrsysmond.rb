@@ -43,7 +43,8 @@ action :configure do
               ssl_ca_path:    new_resource.ssl_ca_path,
               pidfile:        new_resource.pidfile,
               collector_host: new_resource.collector_host,
-              timeout:        new_resource.timeout
+              timeout:        new_resource.timeout,
+              hostname:       new_resource.hostname
 
     notifies  :restart, 'service[newrelic-sysmond]'
   end

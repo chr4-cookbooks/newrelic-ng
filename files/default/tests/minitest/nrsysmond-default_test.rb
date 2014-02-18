@@ -40,4 +40,8 @@ describe 'newrelic-ng::nrsysmond-default' do
   it 'enables ewrelic-sysmond service' do
     service('newrelic-sysmond').must_be_enabled
   end
+
+  it 'Sets the hostname to the fqdn' do
+    file(node['newrelic-ng']['nrsysmond']['config_file']).must_match(/hostname\s*=\s*#{node['fqdn']}/)
+  end
 end

@@ -31,6 +31,7 @@ attribute :ssl_ca_path,    kind_of: String,  default: node['newrelic-ng']['nrsys
 attribute :pidfile,        kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['pidfile']
 attribute :collector_host, kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['collector_host']
 attribute :timeout,        kind_of: Integer, default: node['newrelic-ng']['nrsysmond']['config']['timeout']
+attribute :hostname,       kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['hostname'] || node['fqdn']
 
 attribute :owner,          kind_of: String,  default: 'root'
 attribute :group,          kind_of: String,  default: node['newrelic-ng']['user']['group']

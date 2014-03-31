@@ -1,8 +1,6 @@
 ---
-driver_plugin: vagrant
-driver_config:
-  require_chef_omnibus: true
-  use_vagrant_berkshelf_plugin: true
+driver:
+  name: vagrant
 
 platforms:
 - name: centos-6.5
@@ -13,7 +11,7 @@ platforms:
   run_list: recipe[apt]
 - name: ubuntu-12.04
   run_list: recipe[apt]
-- name: debian-7
+- name: debian-7.2.0
   run_list: recipe[apt]
 
 suites:

@@ -77,3 +77,4 @@ attribute :webtransaction_name_remove_trailing_path, kind_of: String, default: n
 attribute :webtransaction_name_functions,            kind_of: String, default: node['newrelic-ng']['app_monitoring']['webtransaction']['name']['functions']
 attribute :webtransaction_name_files,                kind_of: String, default: node['newrelic-ng']['app_monitoring']['webtransaction']['name']['files']
 attribute :analytics_events_enabled,                 kind_of: String, default: node['newrelic-ng']['app_monitoring']['analytics']['events']['enabled']
+attribute :high_security,                            kind_of: String, default: node['newrelic-ng']['app_monitoring']['high_security']

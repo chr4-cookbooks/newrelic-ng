@@ -22,6 +22,10 @@
 include_recipe 'build-essential'
 include_recipe 'python'
 
+python_pip 'setuptools' do
+  action :upgrade
+end
+
 python_pip 'newrelic-plugin-agent' do
   package_name node['newrelic-ng']['plugin-agent']['pip_package']
   action :install

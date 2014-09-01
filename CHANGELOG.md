@@ -26,7 +26,7 @@ This file is used to list changes made in each version of newrelic-ng.
 
 ## 0.3.1:
 
-* Several small bugfixes, thanks to Cameron Johnston!
+* Several small bugfixes
 
 ## 0.3.0:
 

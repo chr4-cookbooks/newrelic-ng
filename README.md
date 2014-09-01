@@ -16,7 +16,7 @@ This cookbook requires Chef 11 or later.
 
 ### server monitoring with nrsysmond
 
-You can set your Newrelic license_key in the following attribute
+You can set your Newrelic license key in the following attribute
 
 ```ruby
 node['newrelic-ng']['license_key'] = 'CHANGE_ME'
@@ -213,7 +213,7 @@ To use the providers, add the following to your `metadata.rb`
 depends 'newrelic-ng'
 ```
 
-### newrelic_ng_nrsysmond
+### newrelic\_ng\_nrsysmond
 
 When nrsysmond is installed (e.g. using the `newrelic-ng::nrsysmond-install` recipe), you can configure it using the LWRP.
 
@@ -251,7 +251,7 @@ newrelic_ng_nrsysmond 'custom' do
 end
 ```
 
-### newrelic_ng_plugin_agent
+### newrelic\_ngi\_plugini\_agent
 
 When the plugin-agent is installed (e.g. using the `newrelic-ng::plugin-agent-install` recipe), you can configure it using the LWRP.
 
@@ -292,7 +292,7 @@ EOS
 end
 ```
 
-### newrelic_ng_generic_agent
+### newrelic\_ng\_generic\_agent
 
 You can install and configure generic Ruby New Relic agents also via this LWRPs. For more information, see attributes and recipes section above.
 

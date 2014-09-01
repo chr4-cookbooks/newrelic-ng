@@ -19,6 +19,14 @@
 #
 license_key=<%= @license_key %>
 
+# Option : hostname
+# Value  : Hostname to display in the New Relic web frontend
+# Default: System hostname
+#
+<% if @hostname %>
+hostname=<%= @hostname %>
+<% end -%>
+
 #
 # Option : loglevel
 # Value  : Level of detail you want in the log file (as defined by the logfile

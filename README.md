@@ -154,6 +154,7 @@ These are not namespaced to `php-agent`, as they could later be shared amongst t
 * `node['newrelic-ng']['app_monitoring']['webtransaction']['name']['files']`
 * `node['newrelic-ng']['app_monitoring']['daemon']['auditlog']`
 * `node['newrelic-ng']['app_monitoring']['analytics']['events']['enabled']`
+* `node['newrelic-ng']['app_monitoring']['high_security']`
 
 ## Recipes
 

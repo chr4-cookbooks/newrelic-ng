@@ -229,6 +229,7 @@ newrelic_ng_nrsysmond 'custom' do
   license_key 'MY_STAGING_KEY'    if node.chef_environment == 'staging'
 
   # additional nrsysmond configuration options
+  hostname       node['fqdn']
   ssl            false
   loglevel       'info'
   proxy          nil

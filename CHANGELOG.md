@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.5.1:
+
+- Add `hostname` attribute to nrsysmond
+- Add `high_security` attribute to php-agent
+
 ## 0.5.0:
 
 * Change binary name to newrelic-plugin-agent (was newrelic\_plugin\_agent)

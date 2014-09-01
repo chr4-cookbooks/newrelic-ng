@@ -37,7 +37,7 @@ describe 'newrelic-ng::nrsysmond-default' do
     cmd.exitstatus.to_s.must_include('0')
   end
 
-  it 'enables ewrelic-sysmond service' do
+  it 'enables newrelic-sysmond service' do
     service('newrelic-sysmond').must_be_enabled
   end
 end

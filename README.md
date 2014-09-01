@@ -350,6 +350,7 @@ e.g.
 # License and Authors
 
 Author: Chris Aumann <me@chr4.org>
-Contributors: Cameron Johnston <cameron@needle.com>, Jeff Byrnes <jeff@evertrue.com>
+Contributors: Cameron Johnston <cameron@needle.com>, Jeff Byrnes <jeff@evertrue.com>,
+              Chris Graham <chris.graham@blackboard.com>
 
 License: GPLv3

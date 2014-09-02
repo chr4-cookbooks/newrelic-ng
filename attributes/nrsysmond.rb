@@ -29,7 +29,7 @@ default['newrelic-ng']['nrsysmond']['config'] = {
   pidfile: nil,
   collector_host: nil,
   timeout: nil,
-  hostname: nil
+  hostname: nil,
 }
 
 default['newrelic-ng']['nrsysmond']['config_file'] = '/etc/newrelic/nrsysmond.cfg'

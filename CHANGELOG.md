@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.5.1:
+
+- Add `hostname` attribute to nrsysmond
+- Add `high_security` attribute to php-agent
+
 ## 0.5.0:
 
 * Change binary name to newrelic-plugin-agent (was newrelic\_plugin\_agent)
@@ -13,7 +18,7 @@ This file is used to list changes made in each version of newrelic-ng.
 
 ## 0.3.4:
 
-* Add workaround for newrelic_generic_agent, was not starting up properly, due to bug in their status command
+* Add workaround for newrelic\_generic\_agent, was not starting up properly, due to bug in their status command
 
 ## 0.3.3:
 
@@ -26,11 +31,11 @@ This file is used to list changes made in each version of newrelic-ng.
 
 ## 0.3.1:
 
-* Several small bugfixes, thanks to Cameron Johnston!
+* Several small bugfixes
 
 ## 0.3.0:
 
-* Adds support for generic newrelic agents (e.g. newrelic_nginx_agent, newrelic_sidekiq_agent)
+* Adds support for generic newrelic agents (e.g. newrelic\_nginx\_agent, newrelic\_sidekiq\_agent)
 
 ## 0.2.0:
 

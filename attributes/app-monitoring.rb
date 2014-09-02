@@ -46,3 +46,4 @@ default['newrelic-ng']['app_monitoring']['webtransaction']['name']['functions'] 
 default['newrelic-ng']['app_monitoring']['webtransaction']['name']['files'] = nil
 default['newrelic-ng']['app_monitoring']['daemon']['auditlog'] = nil
 default['newrelic-ng']['app_monitoring']['analytics']['events']['enabled'] = nil
+default['newrelic-ng']['app_monitoring']['high_security'] = nil

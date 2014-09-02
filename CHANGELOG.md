@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.5.0:
+
+* Change binary name to newrelic-plugin-agent (was newrelic\_plugin\_agent)
+* Upgrade newrelic-plugin-agent by default, in case an older version is installed
+
 ## 0.4.0:
 
 * Add support for php-agent, thanks to Jeff Byrnes!

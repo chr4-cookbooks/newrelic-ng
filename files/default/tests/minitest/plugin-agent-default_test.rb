@@ -34,7 +34,7 @@ describe 'newrelic-ng::plugin-agent-default' do
   end
 
   it 'installs plugin-agent' do
-    file(which('newrelic_plugin_agent')).must_exist
+    file(which('newrelic-plugin-agent')).must_exist
   end
 
   it 'sets license key' do

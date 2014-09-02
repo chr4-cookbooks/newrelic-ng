@@ -24,7 +24,7 @@ include_recipe 'python'
 
 python_pip 'newrelic-plugin-agent' do
   package_name node['newrelic-ng']['plugin-agent']['pip_package']
-  action :install
+  action :upgrade
 end
 
 newrelic_ng_user 'default' do

@@ -19,10 +19,10 @@
 #
 
 default['newrelic-ng']['plugin-agent']['poll_interval'] = 60
-default['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic_plugin_agent.pid'
-default['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic_plugin_agent.log'
+default['newrelic-ng']['plugin-agent']['pidfile'] = '/var/run/newrelic/newrelic-plugin-agent.pid'
+default['newrelic-ng']['plugin-agent']['logfile'] = '/var/log/newrelic/newrelic-plugin-agent.log'
 default['newrelic-ng']['plugin-agent']['service_config'] = ''
 
-default['newrelic-ng']['plugin-agent']['config_file'] = '/etc/newrelic/newrelic_plugin_agent.cfg'
+default['newrelic-ng']['plugin-agent']['config_file'] = '/etc/newrelic/newrelic-plugin-agent.cfg'
 default['newrelic-ng']['plugin-agent']['mode'] = 00640
 default['newrelic-ng']['plugin-agent']['pip_package'] = 'newrelic-plugin-agent'

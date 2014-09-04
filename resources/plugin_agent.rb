@@ -26,6 +26,7 @@ attribute :poll_interval,  kind_of: Integer, default: node['newrelic-ng']['plugi
 attribute :pidfile,        kind_of: String,  default: node['newrelic-ng']['plugin-agent']['pidfile']
 attribute :logfile,        kind_of: String,  default: node['newrelic-ng']['plugin-agent']['logfile']
 attribute :service_config, kind_of: String,  default: node['newrelic-ng']['plugin-agent']['service_config']
+attribute :agent_name,     kind_of: String,  default: node['newrelic-ng']['plugin-agent']['default_agent_name']
 
 attribute :owner,          kind_of: String, default: node['newrelic-ng']['user']['name']
 attribute :group,          kind_of: String, default: node['newrelic-ng']['user']['group']

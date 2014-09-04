@@ -19,7 +19,19 @@
 #
 
 action :configure do
+  filenames = calculate_filenames
+  
+  install_prerequisites
+  generate_config_file filenames
+  generate_init_script filenames
+  start_service filenames
+end
 
+def defaulted? attribute
+  new_resource.send(attribute.to_sym) == node['newrelic-ng']['plugin-agent'][attribute]
+end
+
+def install_prerequisites
   # postgresql and pgbouner need pg_config
   if new_resource.service_config.include? 'postgresql:' or
      new_resource.service_config.include? 'pgbouncer:'
@@ -34,9 +46,49 @@ action :configure do
   python_pip 'newrelic_plugin_agent[mongodb]'    if new_resource.service_config.include? 'mongodb:'
   python_pip 'newrelic_plugin_agent[pgbouncer]'  if new_resource.service_config.include? 'pgbouncer:'
   python_pip 'newrelic_plugin_agent[postgresql]' if new_resource.service_config.include? 'postgresql:'
+end
 
+def calculate_filenames
+  pidfile = if defaulted? :agent_name
+              new_resource.pidfile
+            elsif defaulted? :pidfile
+              "/var/run/newrelic/newrelic-plugin-agent-#{new_resource.agent_name}.pid"
+            else
+              new_resource.pidfile
+            end
 
-  r = template new_resource.config_file do
+  logfile = if defaulted? :agent_name
+              new_resource.logfile
+            elsif defaulted? :logfile
+              "/var/log/newrelic/newrelic-plugin-agent-#{new_resource.agent_name}.log"
+            else
+              new_resource.logfile
+            end
+
+  config_file = if defaulted? :agent_name
+                  new_resource.logfile
+                elsif defaulted? :config_file
+                  "/etc/newrelic/newrelic-plugin-agent-#{new_resource.agent_name}.cfg"
+                else
+                  new_resource.config_file
+                end
+
+  service_name = if defaulted? :agent_name
+                   'newrelic-plugin-agent'
+                 else
+                   "newrelic-plugin-agent-#{new_resource.agent_name}"
+                 end
+
+  {
+      pidfile: pidfile,
+      logfile: logfile,
+      config_file: config_file, 
+      service_name: service_name
+  }
+end
+
+def generate_config_file filenames
+  r = template filenames[:config_file] do
     cookbook  new_resource.cookbook
     source    new_resource.source
     owner     new_resource.owner
@@ -46,16 +98,39 @@ action :configure do
     variables license_key:    new_resource.license_key,
               poll_interval:  new_resource.poll_interval,
               user:           new_resource.owner,
-              pidfile:        new_resource.pidfile,
-              logfile:        new_resource.logfile,
+              pidfile:        filenames[:pidfile],
+              logfile:        filenames[:logfile],
               service_config: new_resource.service_config
   end
 
   new_resource.updated_by_last_action(true) if r.updated_by_last_action?
+end
 
-  service 'newrelic-plugin-agent' do
+def generate_init_script filenames
+  unless defaulted? :agent_name
+    init_script_template = value_for_platform_family(
+      rhel:   'plugin-agent-init-rhel.erb',
+      debian: 'plugin-agent-init-deb.erb'
+    )
+
+    # deploy initscript
+    i = template "/etc/init.d/#{filenames[:service_name]}" do
+      mode      00755
+      cookbook  'newrelic-ng'
+      source    init_script_template
+      variables config_file: filenames[:config_file],
+                user:        new_resource.owner,
+                group:       new_resource.group
+    end
+
+    new_resource.updated_by_last_action(true) if i.updated_by_last_action?
+  end
+end
+
+def start_service filenames
+  service filenames[:service_name] do
     supports   status: true, restart: true
-    subscribes :restart, "template[#{new_resource.config_file}]"
+    subscribes :restart, "template[#{filenames[:config_file]}]"
     action   [ :enable, :start ]
   end
 end

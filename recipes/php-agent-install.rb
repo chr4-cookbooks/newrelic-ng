@@ -33,6 +33,7 @@ end
 # waits until php agent is installed first
 execute 'newrelic-install' do
   command 'newrelic-install install'
+  environment ({'NR_INSTALL_SILENT' => '1'})
   action :nothing
   notifies :restart, "service[#{node['newrelic-ng']['app_monitoring']['php-agent']['server_service_name']}]", :delayed
 end

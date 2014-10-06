@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.5.2:
+
+- Use `NR_INSTALL_SILENT` when installing php-agent
+
 ## 0.5.1:
 
 - Add `hostname` attribute to nrsysmond

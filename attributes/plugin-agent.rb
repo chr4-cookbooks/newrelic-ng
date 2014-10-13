@@ -26,3 +26,4 @@ default['newrelic-ng']['plugin-agent']['service_config'] = ''
 default['newrelic-ng']['plugin-agent']['config_file'] = '/etc/newrelic/newrelic-plugin-agent.cfg'
 default['newrelic-ng']['plugin-agent']['mode'] = 00640
 default['newrelic-ng']['plugin-agent']['pip_package'] = 'newrelic-plugin-agent'
+default['newrelic-ng']['plugin-agent']['agent_name'] = 'default'

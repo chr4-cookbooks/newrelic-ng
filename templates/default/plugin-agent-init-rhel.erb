@@ -11,9 +11,6 @@
 # Application
 APP="/usr/bin/newrelic-plugin-agent"
 
-# PID File
-PID_FILE="/var/run/newrelic/newrelic-plugin-agent.pid"
-
 # Additional arguments
 OPTS=""
 
@@ -30,7 +27,10 @@ if [ ! -f "${CONF}" ]; then
   failure $"cannot find newrelic-plugin-agent configuration file: '${CONF}'"
   echo
   exit 1
-fi
+  fi
+
+# PID File
+PIDFILE=$(sed -n -e 's/^[ ]*pidfile[ ]*:[ ]*//p' -e 's/[ ]*$//' ${CONF})
 
 OPTS="-c ${CONF} ${OPTS}"
 

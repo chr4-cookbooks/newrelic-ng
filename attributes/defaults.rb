@@ -19,6 +19,7 @@
 #
 
 default['newrelic-ng']['license_key'] = 'CHANGE ME'
+default['newrelic-ng']['enable'] = true
 
 default['newrelic-ng']['user']['name']   = 'newrelic'
 default['newrelic-ng']['user']['group']  = 'newrelic'

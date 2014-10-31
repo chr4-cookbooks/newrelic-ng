@@ -21,7 +21,11 @@
 action :configure do
   service 'newrelic-sysmond' do
     supports status: true, restart: true
-    action   :enable
+    if node['newrelic-ng']['enable'] 
+      action   :enable
+    else
+      action [ :stop, :disable ]
+    end
   end
 
   directory ::File.dirname(new_resource.config_file)

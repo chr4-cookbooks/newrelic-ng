@@ -24,7 +24,7 @@ action :configure do
   install_prerequisites
   generate_config_file filenames
   generate_init_script filenames
-  start_service filenames
+  start_or_stop_service filenames
 end
 
 def defaulted? attribute
@@ -127,10 +127,14 @@ def generate_init_script filenames
   end
 end
 
-def start_service filenames
+def start_or_stop_service filenames
   service filenames[:service_name] do
     supports   status: true, restart: true
     subscribes :restart, "template[#{filenames[:config_file]}]"
-    action   [ :enable, :start ]
+    if node['newrelic-ng']['enable']
+      action   [ :enable, :start ]
+    else
+      action   [ :stop, :disable ]
+    end
   end
 end

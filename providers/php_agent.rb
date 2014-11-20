@@ -35,47 +35,47 @@ action :configure do
   Chef::Log.info("newrelic-daemon startup mode: #{new_resource.startup_mode}")
 
   case new_resource.startup_mode
-    when 'agent'
-      # agent startup mode
+  when 'agent'
+    # agent startup mode
 
-      # ensure that the daemon isn't currently running
-      service 'newrelic-daemon' do
-        # stops the service if it's running and disables it from
-        # starting at system boot time
-        action [:disable, :stop]
-      end
+    # ensure that the daemon isn't currently running
+    service 'newrelic-daemon' do
+      # stops the service if it's running and disables it from
+      # starting at system boot time
+      action [:disable, :stop]
+    end
 
-      # ensure that the file #{new_resource.daemon_config_file} does
-      # not exist if it does, move it aside (or remove it)
-      execute 'newrelic-backup-cfg' do
-        command "mv #{new_resource.daemon_config_file} #{new_resource.daemon_config_file}.external"
-        only_if { ::File.exist?(new_resource.daemon_config_file) }
-      end
-    when 'external'
-      # external startup mode
+    # ensure that the file #{new_resource.daemon_config_file} does
+    # not exist if it does, move it aside (or remove it)
+    execute 'newrelic-backup-cfg' do
+      command "mv #{new_resource.daemon_config_file} #{new_resource.daemon_config_file}.external"
+      only_if { ::File.exist?(new_resource.daemon_config_file) }
+    end
+  when 'external'
+    # external startup mode
 
-      # configure proxy daemon settings
-      daemon_config = template new_resource.daemon_config_file do
-        cookbook  new_resource.cookbook
-        source    new_resource.source
-        owner     new_resource.owner
-        group     new_resource.group
-        mode      new_resource.mode
+    # configure proxy daemon settings
+    daemon_config = template new_resource.daemon_config_file do
+      cookbook  new_resource.cookbook
+      source    new_resource.source
+      owner     new_resource.owner
+      group     new_resource.group
+      mode      new_resource.mode
 
-        variables config: new_resource
+      variables config: new_resource
 
-        notifies :restart, "service[newrelic-daemon]", :immediately
-        notifies :restart, "service[#{new_resource.server_service_name}]", :delayed
-      end
+      notifies :restart, "service[newrelic-daemon]", :immediately
+      notifies :restart, "service[#{new_resource.server_service_name}]", :delayed
+    end
 
-      new_resource.updated_by_last_action(true) if daemon_config.updated_by_last_action?
+    new_resource.updated_by_last_action(true) if daemon_config.updated_by_last_action?
 
-      service 'newrelic-daemon' do
-        # start the service if it's not running and enable it to start at system boot time
-        action [:enable, :start]
-      end
-    else
-      Chef::Application.fatal!("#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode.")
+    service 'newrelic-daemon' do
+      # start the service if it's not running and enable it to start at system boot time
+      action [:enable, :start]
+    end
+  else
+    Chef::Application.fatal!("#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode.")
   end
 
   # configure New Relic INI file and set the daemon related options

@@ -239,6 +239,9 @@ newrelic_ng_nrsysmond 'custom' do
   collector_host 'my-collector-host.com'
   timeout        10
 
+  # You can also set a custom label
+  # labels       'label_type:label_value'
+
   # path and attributes of nrsysmond.cfg
   owner       'root'
   group       'root'

@@ -44,7 +44,8 @@ action :configure do
               pidfile:        new_resource.pidfile,
               collector_host: new_resource.collector_host,
               timeout:        new_resource.timeout,
-              hostname:       new_resource.hostname
+              hostname:       new_resource.hostname,
+              labels:         new_resource.labels
 
     notifies  :restart, 'service[newrelic-sysmond]'
   end

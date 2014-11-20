@@ -33,7 +33,6 @@ module Helpers
           return exe if File.executable? exe
         end
       end
-      return nil
     end
   end
 end

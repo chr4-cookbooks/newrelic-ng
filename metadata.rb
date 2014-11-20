@@ -10,6 +10,6 @@ depends          'build-essential'
 depends          'python'
 depends          'php'
 
-%w{ ubuntu debian redhat centos amazon suse scientific }.each do |os|
+%w(ubuntu debian redhat centos amazon suse scientific).each do |os|
   supports os
 end

@@ -35,7 +35,6 @@ action :configure do
   python_pip 'newrelic_plugin_agent[pgbouncer]'  if new_resource.service_config.include? 'pgbouncer:'
   python_pip 'newrelic_plugin_agent[postgresql]' if new_resource.service_config.include? 'postgresql:'
 
-
   r = template new_resource.config_file do
     cookbook  new_resource.cookbook
     source    new_resource.source

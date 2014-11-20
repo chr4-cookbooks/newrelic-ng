@@ -67,7 +67,6 @@ def install_agent
   end
 end
 
-
 def configure_agent
   config_file = "#{new_resource.target_dir}/#{new_resource.plugin_name}/config/newrelic_plugin.yml"
 

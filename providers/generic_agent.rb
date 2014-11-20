@@ -54,7 +54,7 @@ def install_agent
     command "tar --strip-components=1 -xvjf #{::File.basename(new_resource.source)} -C #{target}" if new_resource.source  =~ /\.bz2$/
 
     cwd     Chef::Config[:file_cache_path]
-    not_if { ::File.exists?(daemon) }
+    not_if { ::File.exist?(daemon) }
   end
 
   execute "bundle_install_#{new_resource.plugin_name}" do

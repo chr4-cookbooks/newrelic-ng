@@ -28,7 +28,7 @@ action :configure do
   # does not exist if it does, move it aside (or remove it)
   execute 'newrelic-backup-key' do
     command "mv #{new_resource.daemon_upgrade_file} #{new_resource.daemon_upgrade_file}.external"
-    only_if { ::File.exists?(new_resource.daemon_upgrade_file) }
+    only_if { ::File.exist?(new_resource.daemon_upgrade_file) }
   end
 
   # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
@@ -49,7 +49,7 @@ action :configure do
       # not exist if it does, move it aside (or remove it)
       execute 'newrelic-backup-cfg' do
         command "mv #{new_resource.daemon_config_file} #{new_resource.daemon_config_file}.external"
-        only_if { ::File.exists?(new_resource.daemon_config_file) }
+        only_if { ::File.exist?(new_resource.daemon_config_file) }
       end
     when 'external'
       # external startup mode

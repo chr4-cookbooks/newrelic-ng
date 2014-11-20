@@ -21,8 +21,8 @@
 action :configure do
 
   # postgresql and pgbouner need pg_config
-  if new_resource.service_config.include? 'postgresql:' or
-     new_resource.service_config.include? 'pgbouncer:'
+  if new_resource.service_config.include?('postgresql:') ||
+     new_resource.service_config.include?('pgbouncer:')
 
     # for the `pg_config` python module to install properly, we need one of these packages
     # see stackoverflow.com/a/12037133/133479 for details

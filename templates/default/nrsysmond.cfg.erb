@@ -19,11 +19,11 @@
 #
 license_key=<%= @license_key %>
 
+<% if @hostname %>
 # Option : hostname
 # Value  : Hostname to display in the New Relic web frontend
 # Default: System hostname
 #
-<% if @hostname %>
 hostname=<%= @hostname %>
 <% end -%>
 
@@ -52,6 +52,7 @@ loglevel=<%= @loglevel %>
 #
 logfile=<%= @logfile %>
 
+<% if @proxy %>
 #
 # Option : proxy
 # Value  : The name and optional login credentials of the proxy server to use
@@ -63,7 +64,6 @@ logfile=<%= @logfile %>
 #            fred:secret@proxy.mydomain.com:8181
 # Default: none (use a direct connection)
 #
-<% if @proxy %>
 proxy=<%= @proxy %>
 <% end -%>
 
@@ -76,6 +76,7 @@ proxy=<%= @proxy %>
 #
 ssl=<%= @ssl.to_s %>
 
+<% if @ssl_ca_bundle %>
 #
 # Setting: ssl_ca_bundle
 # Type   : string
@@ -88,10 +89,10 @@ ssl=<%= @ssl.to_s %>
 #          is set to false.
 # Default: none
 #
-<% if @ssl_ca_bundle %>
 ssl_ca_bundle=<%= @ssl_ca_bundle %>
 <% end -%>
 
+<% if @ssl_ca_path %>
 # Setting: ssl_ca_path
 # Type   : string
 # Purpose: Sets the location of a directory containing trusted CA certificates
@@ -102,10 +103,10 @@ ssl_ca_bundle=<%= @ssl_ca_bundle %>
 #          setting has no effect when ssl is set to false.
 # Default: none
 #
-<% if @ssl_ca_path %>
 ssl_ca_path=<%= @ssl_ca_path %>
 <% end -%>
 
+<% if @pidfile %>
 #
 # Option : pidfile
 # Value  : Name of a file where the server monitoring daemon will store it's
@@ -115,10 +116,10 @@ ssl_ca_path=<%= @ssl_ca_path %>
 # Default: /tmp/nrsysmond.pid
 # Note   : Can also be set with the -p command line option.
 #
-<% if @pidfile %>
 pidfile=<%= @pidfile %>
 <% end -%>
 
+<% if @collector_host %>
 #
 # Option : collector_host
 # Value  : The name of the New Relic collector to connect to. This should only
@@ -128,10 +129,10 @@ pidfile=<%= @pidfile %>
 #          if SSL is enabled. If the port is omitted the default value is used.
 # Default: collector.newrelic.com
 #
-<% if @collector_host %>
 collector_host=<%= @collector_host %>
 <% end -%>
 
+<% if @timeout %>
 #
 # Option : timeout
 # Value  : How long the monitor should wait to contact the collector host. If
@@ -144,10 +145,10 @@ collector_host=<%= @collector_host %>
 #          once the original connection has been made. The value is in seconds.
 # Default: 30
 #
-<% if @timeout %>
 timeout=<%= @timeout %>
 <% end -%>
 
+<% if @labels %>
 #
 # Option : labels
 # Value  : A series of label_type/label_value pairings
@@ -157,6 +158,5 @@ timeout=<%= @timeout %>
 #            labels = Environment:Production;DataCenter:EastUS;
 # Default: none
 #
-<% if @labels %>
 labels=<%= @labels %>
 <% end -%>

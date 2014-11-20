@@ -64,7 +64,7 @@ action :configure do
 
       variables config: new_resource
 
-      notifies :restart, "service[newrelic-daemon]", :immediately
+      notifies :restart, 'service[newrelic-daemon]', :immediately
       notifies :restart, "service[#{new_resource.server_service_name}]", :delayed
     end
 

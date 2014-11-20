@@ -22,7 +22,7 @@ actions        :configure
 default_action :configure
 
 attribute :license_key,    kind_of: String, name_attribute: true
-attribute :ssl,            kind_of: [ TrueClass, FalseClass ], default: node['newrelic-ng']['nrsysmond']['config']['ssl']
+attribute :ssl,            kind_of: [TrueClass, FalseClass], default: node['newrelic-ng']['nrsysmond']['config']['ssl']
 attribute :loglevel,       kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['loglevel']
 attribute :logfile,        kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['logfile']
 attribute :proxy,          kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['proxy']

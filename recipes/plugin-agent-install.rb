@@ -35,9 +35,9 @@ newrelic_ng_user 'default' do
 end
 
 # create config/run/log directories
-[ node['newrelic-ng']['plugin-agent']['config_file'],
-  node['newrelic-ng']['plugin-agent']['pidfile'],
-  node['newrelic-ng']['plugin-agent']['logfile'] ].each do |dir|
+[node['newrelic-ng']['plugin-agent']['config_file'],
+ node['newrelic-ng']['plugin-agent']['pidfile'],
+ node['newrelic-ng']['plugin-agent']['logfile']].each do |dir|
 
   directory ::File.dirname(dir) do
     owner node['newrelic-ng']['user']['name']

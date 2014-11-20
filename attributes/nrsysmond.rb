@@ -41,5 +41,5 @@ default['newrelic-ng']['nrsysmond']['rpm']['repo']['package'] = 'newrelic-repo'
 
 default['newrelic-ng']['nrsysmond']['apt']['repo']['url'] = 'http://apt.newrelic.com/debian/'
 default['newrelic-ng']['nrsysmond']['apt']['repo']['distribution'] = 'newrelic'
-default['newrelic-ng']['nrsysmond']['apt']['repo']['components'] = [ 'non-free' ]
+default['newrelic-ng']['nrsysmond']['apt']['repo']['components'] = %w(non-free)
 default['newrelic-ng']['nrsysmond']['apt']['repo']['key'] = 'http://download.newrelic.com/548C16BF.gpg'

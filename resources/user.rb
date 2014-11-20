@@ -24,4 +24,4 @@ default_action :create
 attribute :name,   kind_of: String, name_attribute: true
 attribute :group,  kind_of: String, default: node['newrelic-ng']['user']['group']
 attribute :shell,  kind_of: String, default: node['newrelic-ng']['user']['shell']
-attribute :system, kind_of: [ TrueClass, FalseClass ], default: node['newrelic-ng']['user']['system']
+attribute :system, kind_of: [TrueClass, FalseClass], default: node['newrelic-ng']['user']['system']

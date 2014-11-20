@@ -56,6 +56,6 @@ action :configure do
   service 'newrelic-plugin-agent' do
     supports   status: true, restart: true
     subscribes :restart, "template[#{new_resource.config_file}]"
-    action   [ :enable, :start ]
+    action   [:enable, :start]
   end
 end

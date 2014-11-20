@@ -67,38 +67,40 @@ logfile=<%= @logfile %>
 proxy=<%= @proxy %>
 <% end -%>
 
-#
-# Option : ssl
-# Value  : Whether or not to use the Secure Sockets Layer (SSL) for all
-#          communication with the New Relic collector. Possible values are
-#          true/on or false/off. In certain rare cases you may need to modify
-#          the SSL certificates settings below.
-# Default: false
+# Setting: ssl
+# Type   : boolean
+# Purpose: If you prefer the daemon to use the secure HTTP (https) protocol
+#          when communicating with the New Relic collector servers, set this
+#          to true.
+# Default: true (as of version 1.4)
 #
 ssl=<%= @ssl.to_s %>
 
 #
-# Option : ssl_ca_bundle
-# Value  : The name of a PEM-encoded Certificate Authority (CA) bundle to use
-#          for SSL connections. This very rarely needs to be set. The monitor
-#          will attempt to find the bundle in the most common locations. If
-#          you need to use SSL and the monitor is unable to locate a CA bundle
-#          then either set this value or the ssl_ca_path option below.
-# Default: /etc/ssl/certs/ca-certificates.crt or
-#          /etc/pki/tls/certs/ca-bundle.crt
-# Note   : Can also be set with the -b command line option.
+# Setting: ssl_ca_bundle
+# Type   : string
+# Purpose: Sets the location of a file containing CA certificates in PEM
+#          format. When set, the certificates in this file will be used
+#          to authenticate the New Relic collector servers. If ssl_ca_path
+#          is also set (see below), the certificates in this file will be
+#          searched first, followed by the certificates contained in the
+#          ssl_ca_path directory. This setting has no effect when ssl
+#          is set to false.
+# Default: none
 #
 <% if @ssl_ca_bundle %>
 ssl_ca_bundle=<%= @ssl_ca_bundle %>
 <% end -%>
 
-#
-# Option : ssl_ca_path
-# Value  : If your SSL installation does not use CA bundles, but rather has a
-#          directory with PEM-encoded Certificate Authority files, set this
-#          option to the name of the directory that contains all the CA files.
-# Default: /etc/ssl/certs
-# Note   : Can also be set with the -S command line option.
+# Setting: ssl_ca_path
+# Type   : string
+# Purpose: Sets the location of a directory containing trusted CA certificates
+#          in PEM format. When set, the certificates in this directory will be
+#          used to authenticate the New Relic collector servers. If
+#          ssl_ca_bundle is also set (see above), it will be searched first
+#          followed by the certificates contained in ssl_ca_path. This
+#          setting has no effect when ssl is set to false.
+# Default: none
 #
 <% if @ssl_ca_path %>
 ssl_ca_path=<%= @ssl_ca_path %>

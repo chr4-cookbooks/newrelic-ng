@@ -48,7 +48,7 @@ end
 
 init_script_template = value_for_platform_family(
   rhel:   'plugin-agent-init-rhel.erb',
-  debian: 'plugin-agent-init-deb.erb'
+  debian: 'plugin-agent-init-deb.erb',
 )
 
 # deploy initscript

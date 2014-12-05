@@ -22,7 +22,7 @@ actions        :configure
 default_action :configure
 
 attribute :owner,          kind_of: String, default: 'root'
-attribute :group,          kind_of: String, default: 'root'
+attribute :group,          kind_of: String, default: node['root_group']
 attribute :shell,          kind_of: String, default: node['newrelic-ng']['user']['shell']
 attribute :system,         kind_of: String, default: node['newrelic-ng']['user']['system']
 

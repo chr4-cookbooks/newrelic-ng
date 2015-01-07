@@ -19,10 +19,16 @@
 #
 
 def install_agent
-  # we need to make sure we have a unique name.
+  # Do install system-wide ruby and use this ruby for the agent
+  node['newrelic-ng']['generic-agent']['ruby-packages'].each do |pkg|
+    package pkg
+  end
+
+  # We need to make sure we have a unique name.
   # bundler might be installed already in e.g. the chruby/rvm environment
   gem_package "bundler (#{new_resource.plugin_name})" do
     package_name 'bundler'
+    gem_binary '/usr/bin/gem'
   end
 
   package 'gzip'  if new_resource.source  =~ /\.(tgz|gz)$/

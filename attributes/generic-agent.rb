@@ -18,5 +18,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+default['newrelic-ng']['generic-agent']['ruby-packages'] = value_for_platform_family(
+  'rhel' => %w(ruby ruby-devel rubygems),
+  'debian' => %w(ruby ruby-dev),
+)
+
 default['newrelic-ng']['generic-agent']['url'] = nil
 default['newrelic-ng']['generic-agent']['target_dir'] = '/opt/newrelic-agents'

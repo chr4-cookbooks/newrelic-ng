@@ -23,20 +23,6 @@ require File.expand_path('../support/helpers', __FILE__)
 describe 'newrelic-ng::generic-agent-default' do
   include Helpers::TestHelper
 
-  it 'installs newrelic nginx agent' do
-    file("#{node['newrelic-ng']['generic-agent']['target_dir']}/nginx_status_agent/newrelic_nginx_agent.daemon/")
-  end
-
-  it 'sets license key (nginx)' do
-    file("#{node['newrelic-ng']['generic-agent']['target_dir']}/nginx_status_agent/config/newrelic_plugin.yml").must_include('TESTKEY_GENERIC_AGENT')
-  end
-
-  it 'starts newrelic nginx agent' do
-    # service status doesn't work, so grepping process table instead
-    cmd = shell_out('ps aux |grep -v grep |grep -q newrelic_nginx_agent')
-    cmd.exitstatus.to_s.must_include('0')
-  end
-
   it 'installs newrelic sidekiq agent' do
     file("#{node['newrelic-ng']['generic-agent']['target_dir']}/sidekiq_status_agent/newrelic_sidekiq_agent.daemon/")
   end

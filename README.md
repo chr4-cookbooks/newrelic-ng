@@ -6,7 +6,6 @@ This cookbook provides LWRPs and recipes to install and configure different moni
 * MeetMe [newrelic-plugin-agent](https://github.com/MeetMe/newrelic-plugin-agent)
 * Generic ruby newrelic agents like
   * [newrelic_sidekiq_agent](https://github.com/eksoverzero/newrelic_sidekiq_agent)
-  * [newrelic_nginx_agent](https://rpm.newrelic.com/accounts/29043/plugins/directory/13)
   * Should work with all ruby newrelic agents that are using `config/newrelic_plugin.yml` configuration file and `newrelic_[NAME]_agent.daemon`
 * PHP Agent
 
@@ -64,19 +63,6 @@ EOS
 ### generic-agent
 
 Installs a generic plugin agent. E.g.
-
-[newrelic_nginx_agent](https://rpm.newrelic.com/accounts/29043/plugins/directory/13):
-
-```ruby
-node['newrelic-ng']['generic-agent']['agents']['nginx_status_agent'] = {
-    source: 'http://nginx.com/download/newrelic/newrelic_nginx_agent.tar.gz',
-    config: <<-EOS
-- instance_name: localhost
-  status_url: http://localhost/nginx_stub_status
-EOS
-  }
-}
-```
 
 [newrelic_sidekiq_agent](https://github.com/eksoverzero/newrelic_sidekiq_agent):
 
@@ -300,17 +286,6 @@ end
 You can install and configure generic Ruby New Relic agents also via this LWRPs. For more information, see attributes and recipes section above.
 
 Example:
-
-```ruby
-newrelic_ng_generic_agent 'MY_LICENSE_KEY' do
-  plugin_name 'nginx_status_agent'
-  source 'http://nginx.com/download/newrelic/newrelic_nginx_agent.tar.gz'
-  config <<-EOS
-- instance_name: localhost
-  status_url: http://localhost/nginx_stub_status
-EOS
-end
-```
 
 ```ruby
 newrelic_ng_generic_agent 'MY_LICENSE_KEY' do

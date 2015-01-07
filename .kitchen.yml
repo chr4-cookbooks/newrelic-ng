@@ -56,7 +56,7 @@ suites:
       generic-agent:
         agents:
           sidekiq_status_agent:
-            source: https://github.com/eksoverzero/newrelic_sidekiq_agent/archive/V2.0.tar.gz
+            source: https://github.com/secondimpression/newrelic_sidekiq_agent/archive/v1.1.0.tar.gz
             config: >
               - instance_name: sidekiq_agent_test
                 uri: redis://localhost:6379

@@ -30,4 +30,4 @@ attribute :target_dir,  kind_of: String, default: node['newrelic-ng']['generic-a
 attribute :owner,       kind_of: String, default: node['newrelic-ng']['user']['name']
 attribute :group,       kind_of: String, default: node['newrelic-ng']['user']['group']
 attribute :shell,       kind_of: String, default: node['newrelic-ng']['user']['shell']
-attribute :system,      kind_of: String, default: node['newrelic-ng']['user']['system']
+attribute :system,      kind_of: [TrueClass, FalseClass], default: node['newrelic-ng']['user']['system']

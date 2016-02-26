@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.5.4:
+
+- Fix attribute types, sometimes String was used, even though Boolean or Integer types were valid
+- Use `node['root_group']` attribute as default group attribute for php-agent daemon config file
+- Use system wide ruby (install it if necessary) when installing newrelic generic agents
+- Remove nginx plugin agent support, as it has been moved to packages: See
+  [nr-plugin](http://nginx.com/nr-plugin/) website
+
 ## 0.5.3:
 
 - Add "labels" option support for nrsysmond.cfg

@@ -4,7 +4,7 @@ maintainer_email 'me@chr4.org'
 license          'GNU Public License 3.0'
 description      'Installs/Configures newrelic monitoring'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.5.3'
+version          '0.5.4'
 depends          'apt'
 depends          'build-essential'
 depends          'python'

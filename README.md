@@ -28,7 +28,7 @@ You can e.g. disable ssl
 node['newrelic-ng']['nrsysmond']['config']['ssl'] = false
 ```
 
-For a complete list of attributes, please see [here](https://github.com/flinc-chef/newrelic-ng/blob/master/attributes/nrsysmond.rb)
+For a complete list of attributes, please see [here](https://github.com/chr4-cookbooks/newrelic-ng/blob/master/attributes/nrsysmond.rb)
 
 
 ### plugin-agent

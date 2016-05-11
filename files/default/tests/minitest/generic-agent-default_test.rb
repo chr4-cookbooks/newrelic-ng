@@ -28,7 +28,7 @@ describe 'newrelic-ng::generic-agent-default' do
   end
 
   it 'sets license key (sidekiq)' do
-    file("#{node['newrelic-ng']['generic-agent']['target_dir']}/sidekiq_status_agent/config/newrelic_plugin.yml").must_include('TESTKEY_GENERIC_AGENT')
+    file("#{node['newrelic-ng']['generic-agent']['target_dir']}/sidekiq_status_agent/config/newrelic_plugin.yml").must_include('1234567890123456789012345678901234567890')
   end
 
   it 'starts newrelic sidekiq agent' do

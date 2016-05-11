@@ -28,7 +28,9 @@ suites:
   - recipe[newrelic-ng::nrsysmond-default]
   attributes:
     newrelic-ng:
-      license_key: TESTKEY_NRSYSMOND
+      # This key seems to be valid somehow, further information:
+      # https://github.com/chr4-cookbooks/newrelic-ng/issues/14
+      license_key: 1234567890123456789012345678901234567890
 
 - name: plugin-agent-default
   run_list:
@@ -36,7 +38,9 @@ suites:
   - recipe[newrelic-ng::plugin-agent-default]
   attributes:
     newrelic-ng:
-      license_key: TESTKEY_PLUGIN_AGENT
+      # This key seems to be valid somehow, further information:
+      # https://github.com/chr4-cookbooks/newrelic-ng/issues/14
+      license_key: 1234567890123456789012345678901234567890
       plugin-agent:
         service_config: >
           postgresql:
@@ -52,7 +56,9 @@ suites:
   - recipe[newrelic-ng::generic-agent-default]
   attributes:
     newrelic-ng:
-      license_key: TESTKEY_GENERIC_AGENT
+      # This key seems to be valid somehow, further information:
+      # https://github.com/chr4-cookbooks/newrelic-ng/issues/14
+      license_key: 1234567890123456789012345678901234567890
       generic-agent:
         agents:
           sidekiq_status_agent:
@@ -88,4 +94,6 @@ suites:
       - logio
       - php5
     newrelic-ng:
-      license_key: TESTKEY_PHP_AGENT
+      # This key seems to be valid somehow, further information:
+      # https://github.com/chr4-cookbooks/newrelic-ng/issues/14
+      license_key: 1234567890123456789012345678901234567890

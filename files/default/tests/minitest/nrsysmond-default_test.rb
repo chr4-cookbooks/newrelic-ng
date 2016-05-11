@@ -28,7 +28,7 @@ describe 'newrelic-ng::nrsysmond-default' do
   end
 
   it 'sets license key' do
-    file(node['newrelic-ng']['nrsysmond']['config_file']).must_include('TESTKEY_NRSYSMOND')
+    file(node['newrelic-ng']['nrsysmond']['config_file']).must_include('1234567890123456789012345678901234567890')
   end
 
   it 'starts newrelic-sysmond service' do

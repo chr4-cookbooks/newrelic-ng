@@ -38,7 +38,7 @@ describe 'newrelic-ng::plugin-agent-default' do
   end
 
   it 'sets license key' do
-    file(node['newrelic-ng']['plugin-agent']['config_file']).must_include('TESTKEY_PLUGIN_AGENT')
+    file(node['newrelic-ng']['plugin-agent']['config_file']).must_include('1234567890123456789012345678901234567890')
   end
 
   it 'starts newrelic-plugin-agent service' do

@@ -48,7 +48,7 @@ describe 'newrelic-ng::php-agent-default' do
   end
 
   it 'sets license key' do
-    file(node['newrelic-ng']['app_monitoring']['php-agent']['config_file']).must_include('TESTKEY_PHP_AGENT')
+    file(node['newrelic-ng']['app_monitoring']['php-agent']['config_file']).must_include('1234567890123456789012345678901234567890')
   end
 
 end

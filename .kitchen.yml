@@ -95,3 +95,36 @@ suites:
       # This key seems to be valid somehow, further information:
       # https://github.com/chr4-cookbooks/newrelic-ng/issues/14
       license_key: 1234567890123456789012345678901234567890
+
+- name: php-external-default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[apache2]
+  - recipe[newrelic-ng::php-agent-default]
+  attributes:
+    apache:
+      default_modules:
+      - status
+      - alias
+      - auth_basic
+      - authn_file
+      - authz_groupfile
+      - authz_host
+      - authz_user
+      - dir
+      - env
+      - mime
+      - setenvif
+      - deflate
+      - expires
+      - headers
+      - log_config
+      - logio
+      - php5
+    newrelic-ng:
+      # This key seems to be valid somehow, further information:
+      # https://github.com/chr4-cookbooks/newrelic-ng/issues/14
+      license_key: 1234567890123456789012345678901234567890
+      app_monitoring:
+        php-agent:
+          startup_mode: external

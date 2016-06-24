@@ -4,5 +4,6 @@
 
 desc 'Run rubocop'
 task :rubocop do
+  sh 'rubocop --version'
   sh 'rubocop --display-cop-names'
 end

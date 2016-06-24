@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 2.2.4
+cache:
+  bundler: true
+  directories:
+    - tmp/rubocop_cache
+sudo: false
+env:
+  matrix:
+    - TASK='rubocop'
+script: bundle exec rake $TASK

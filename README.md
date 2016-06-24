@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/chr4-cookbooks/newrelic-ng.svg?branch=master)](https://travis-ci.org/chr4-cookbooks/newrelic-ng)
 # newrelic-ng Cookbook
 
 This cookbook provides LWRPs and recipes to install and configure different monitoring services for Newrelic.

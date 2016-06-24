@@ -38,7 +38,6 @@ end
 [node['newrelic-ng']['plugin-agent']['config_file'],
  node['newrelic-ng']['plugin-agent']['pidfile'],
  node['newrelic-ng']['plugin-agent']['logfile']].each do |dir|
-
   directory ::File.dirname(dir) do
     owner node['newrelic-ng']['user']['name']
     group node['newrelic-ng']['user']['group']
@@ -48,7 +47,7 @@ end
 
 init_script_template = value_for_platform_family(
   rhel:   'plugin-agent-init-rhel.erb',
-  debian: 'plugin-agent-init-deb.erb',
+  debian: 'plugin-agent-init-deb.erb'
 )
 
 # deploy initscript

@@ -19,7 +19,6 @@
 #
 
 action :configure do
-
   service 'newrelic-daemon' do
     supports status: true, start: true, stop: true, restart: true
   end
@@ -94,5 +93,4 @@ action :configure do
   end
 
   new_resource.updated_by_last_action(true) if php_config.updated_by_last_action?
-
 end

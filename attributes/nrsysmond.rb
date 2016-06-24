@@ -36,7 +36,7 @@ default['newrelic-ng']['nrsysmond']['config'] = {
 default['newrelic-ng']['nrsysmond']['config_file'] = '/etc/newrelic/nrsysmond.cfg'
 default['newrelic-ng']['nrsysmond']['mode'] = 00640
 
-default['newrelic-ng']['nrsysmond']['rpm']['repo']['url'] =  "http://download.newrelic.com/pub/newrelic/el5/#{node['newrelic-ng']['arch']}/newrelic-repo-5-3.noarch.rpm"
+default['newrelic-ng']['nrsysmond']['rpm']['repo']['url'] = "http://download.newrelic.com/pub/newrelic/el5/#{node['newrelic-ng']['arch']}/newrelic-repo-5-3.noarch.rpm"
 default['newrelic-ng']['nrsysmond']['rpm']['repo']['package'] = 'newrelic-repo'
 
 default['newrelic-ng']['nrsysmond']['apt']['repo']['url'] = 'http://apt.newrelic.com/debian/'

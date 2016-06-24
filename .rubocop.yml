@@ -10,13 +10,13 @@ MethodLength:
 AbcSize:
   Enabled: false
 
-SingleSpaceBeforeFirstArg:
+SpaceBeforeFirstArg:
   Enabled: false
 
 Documentation:
   Enabled: false
 
-TrailingComma:
+TrailingCommaInLiteral:
     EnforcedStyleForMultiline: comma
 
 # Ignore snake_case filename warnings for now

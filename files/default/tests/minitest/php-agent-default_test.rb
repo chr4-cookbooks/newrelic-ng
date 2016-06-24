@@ -31,12 +31,22 @@ describe 'newrelic-ng::php-agent-default' do
     service('newrelic-daemon').must_be_running
   end
 
-  it 'disables the New Relic daemon from startup init' do
-    service('newrelic-daemon').wont_be_enabled
-  end
+  if node['newrelic-ng']['app_monitoring']['php-agent']['startup_mode'] == 'agent'
+    it 'disables the New Relic daemon from startup init' do
+      service('newrelic-daemon').wont_be_enabled
+    end
 
-  it 'removes the New Relic daemon config' do
-    file(node['newrelic-ng']['app_monitoring']['daemon']['config_file']).wont_exist
+    it 'removes the New Relic daemon config' do
+      file(node['newrelic-ng']['app_monitoring']['daemon']['config_file']).wont_exist
+    end
+  else
+    it 'disables the New Relic daemon from startup init' do
+      service('newrelic-daemon').must_be_enabled
+    end
+
+    it 'removes the New Relic daemon config' do
+      file(node['newrelic-ng']['app_monitoring']['daemon']['config_file']).must_exist
+    end
   end
 
   it 'removes the New Relic upgrade.key' do

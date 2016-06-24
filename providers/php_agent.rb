@@ -57,7 +57,7 @@ action :configure do
     # configure proxy daemon settings
     daemon_config = template new_resource.daemon_config_file do
       cookbook  new_resource.cookbook
-      source    new_resource.source
+      source    new_resource.source_cfg
       owner     new_resource.owner
       group     new_resource.group
       mode      new_resource.mode

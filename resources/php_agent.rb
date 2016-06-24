@@ -30,6 +30,7 @@ attribute :mode,           kind_of: [Integer, String], default: 00644
 
 attribute :cookbook,       kind_of: String, default: 'newrelic-ng'
 attribute :source,         kind_of: String, default: 'newrelic.ini.php.erb'
+attribute :source_cfg,     kind_of: String, default: 'newrelic.cfg.erb'
 
 attribute :license_key,    kind_of: String, name_attribute: true
 

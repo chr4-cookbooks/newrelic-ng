@@ -1,3 +1,6 @@
+# This was only made zendesk for progressing until community PR will get accepted:
+# https://github.com/chr4-cookbooks/newrelic-ng/issues/33
+
 # newrelic-ng Cookbook
 
 This cookbook provides LWRPs and recipes to install and configure different monitoring services for Newrelic.

@@ -20,7 +20,7 @@
 
 default['newrelic-ng']['generic-agent']['ruby-packages'] = value_for_platform_family(
   'rhel' => %w(ruby ruby-devel rubygems),
-  'debian' => %w(ruby ruby-dev)
+  'debian' => %w(ruby ruby-dev),
 )
 
 default['newrelic-ng']['generic-agent']['url'] = nil

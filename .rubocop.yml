@@ -19,6 +19,9 @@ Documentation:
 TrailingCommaInLiteral:
     EnforcedStyleForMultiline: comma
 
+TrailingCommaInArguments:
+    EnforcedStyleForMultiline: comma
+
 # Ignore snake_case filename warnings for now
 Style/FileName:
   Enabled: false

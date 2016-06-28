@@ -1,6 +1,7 @@
 .vagrant
 Berksfile.lock
 Gemfile.lock
+.ruby-version
 *~
 *#
 .#*

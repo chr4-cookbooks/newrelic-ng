@@ -9,4 +9,5 @@ sudo: false
 env:
   matrix:
     - TASK='rubocop'
+    - TASK='foodcritic'
 script: bundle exec rake $TASK

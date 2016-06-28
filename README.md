@@ -331,7 +331,9 @@ e.g.
 # License and Authors
 
 Author: Chris Aumann <me@chr4.org>
+
 Contributors: Cameron Johnston <cameron@needle.com>, Jeff Byrnes <jeff@evertrue.com>,
-              Chris Graham <chris.graham@blackboard.com>, Andy Thompson <me@andytson.com>
+              Chris Graham <chris.graham@blackboard.com>, Andy Thompson <me@andytson.com>,
+              Ofir Petrushka <opetrushka@zendesk.com>
 
 License: GPLv3

@@ -27,10 +27,10 @@ attribute :pidfile,        kind_of: String,  default: node['newrelic-ng']['plugi
 attribute :logfile,        kind_of: String,  default: node['newrelic-ng']['plugin-agent']['logfile']
 attribute :service_config, kind_of: String,  default: node['newrelic-ng']['plugin-agent']['service_config']
 
-attribute :owner,          kind_of: String, default: node['newrelic-ng']['user']['name']
-attribute :group,          kind_of: String, default: node['newrelic-ng']['user']['group']
-attribute :shell,          kind_of: String, default: node['newrelic-ng']['user']['shell']
-attribute :config_file,    kind_of: String, default: node['newrelic-ng']['plugin-agent']['config_file']
+attribute :owner,          kind_of: String,  default: node['newrelic-ng']['user']['name']
+attribute :group,          kind_of: String,  default: node['newrelic-ng']['user']['group']
+attribute :shell,          kind_of: String,  default: node['newrelic-ng']['user']['shell']
+attribute :config_file,    kind_of: String,  default: node['newrelic-ng']['plugin-agent']['config_file']
 attribute :source,         kind_of: String,  default: 'plugin-agent.yaml.erb'
 attribute :mode,           kind_of: [Integer, String], default: node['newrelic-ng']['plugin-agent']['mode']
 attribute :system,         kind_of: [TrueClass, FalseClass], default: node['newrelic-ng']['user']['system']

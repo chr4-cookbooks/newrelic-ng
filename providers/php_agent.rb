@@ -56,7 +56,7 @@ action :configure do
 
     # configure proxy daemon settings
     daemon_config = template new_resource.daemon_config_file do
-      cookbook  new_resource.cookbook
+      cookbook  cookbook_name
       source    new_resource.source_cfg
       owner     new_resource.owner
       group     new_resource.group
@@ -82,7 +82,7 @@ action :configure do
   # (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
   # and restart the web server in order to pick up the new settings
   php_config = template new_resource.config_file do
-    cookbook  new_resource.cookbook
+    cookbook  cookbook_name
     source    new_resource.source
     owner     new_resource.owner
     group     new_resource.group

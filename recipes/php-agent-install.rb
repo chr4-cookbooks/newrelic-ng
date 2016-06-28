@@ -19,7 +19,7 @@
 #
 
 include_recipe 'php'
-include_recipe 'newrelic-ng::newrelic-repository'
+include_recipe cookbook_name + '::newrelic-repository'
 
 # An older version (3.0) had a bug in the init scripts that when it
 # shut down the daemon it would also kill dpkg as it was trying to upgrade

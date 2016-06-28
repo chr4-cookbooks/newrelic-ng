@@ -18,6 +18,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe 'newrelic-ng::nrsysmond-install'
+include_recipe cookbook_name + '::nrsysmond-install'
 
 newrelic_ng_nrsysmond node['newrelic-ng']['license_key']

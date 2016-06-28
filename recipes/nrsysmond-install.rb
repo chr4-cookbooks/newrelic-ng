@@ -18,6 +18,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe 'newrelic-ng::newrelic-repository'
+include_recipe cookbook_name + '::newrelic-repository'
 
 package 'newrelic-sysmond'

@@ -28,7 +28,6 @@ attribute :system,         kind_of: [TrueClass, FalseClass], default: node['newr
 
 attribute :mode,           kind_of: [Integer, String], default: 0o644
 
-attribute :cookbook,       kind_of: String, default: 'newrelic-ng'
 attribute :source,         kind_of: String, default: 'newrelic.ini.php.erb'
 attribute :source_cfg,     kind_of: String, default: 'newrelic.cfg.erb'
 

@@ -39,5 +39,4 @@ attribute :group,          kind_of: String,  default: node['newrelic-ng']['user'
 attribute :config_file,    kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config_file']
 attribute :mode,           kind_of: [Integer, String], default: node['newrelic-ng']['nrsysmond']['mode']
 
-attribute :cookbook,       kind_of: String,  default: 'newrelic-ng'
 attribute :source,         kind_of: String,  default: 'nrsysmond.cfg.erb'

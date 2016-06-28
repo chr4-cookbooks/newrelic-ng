@@ -5,9 +5,53 @@ cache:
   bundler: true
   directories:
     - tmp/rubocop_cache
-sudo: false
+sudo: true
 env:
+  global:
+    - KITCHEN_LOCAL_YAML=.kitchen.docker.yml
   matrix:
-    - TASK='rubocop'
-    - TASK='foodcritic'
-script: bundle exec rake $TASK
+    - TASK='rake rubocop'
+    - TASK='rake foodcritic'
+    - TASK='kitchen test nrsysmond-default-ubuntu-1204'
+    - TASK='kitchen test plugin-agent-default-ubuntu-1204'
+    - TASK='kitchen test generic-agent-default-ubuntu-1204'
+    - TASK='kitchen test php-agent-default-ubuntu-1204'
+    - TASK='kitchen test php-external-default-ubuntu-1204'
+    - TASK='kitchen test nrsysmond-default-ubuntu-1404'
+    - TASK='kitchen test plugin-agent-default-ubuntu-1404'
+    - TASK='kitchen test generic-agent-default-ubuntu-1404'
+    - TASK='kitchen test php-agent-default-ubuntu-1404'
+    - TASK='kitchen test php-external-default-ubuntu-1404'
+    - TASK='kitchen test nrsysmond-default-ubuntu-1604'
+    - TASK='kitchen test plugin-agent-default-ubuntu-1604'
+    - TASK='kitchen test generic-agent-default-ubuntu-1604'
+    - TASK='kitchen test php-agent-default-ubuntu-1604'
+    - TASK='kitchen test php-external-default-ubuntu-1604'
+    - TASK='kitchen test nrsysmond-default-debian-79'
+    - TASK='kitchen test plugin-agent-default-debian-79'
+    - TASK='kitchen test generic-agent-default-debian-79'
+    - TASK='kitchen test php-agent-default-debian-79'
+    - TASK='kitchen test php-external-default-debian-79'
+    - TASK='kitchen test nrsysmond-default-debian-84'
+    - TASK='kitchen test plugin-agent-default-debian-84'
+    - TASK='kitchen test generic-agent-default-debian-84'
+    - TASK='kitchen test php-agent-default-debian-84'
+    - TASK='kitchen test php-external-default-debian-84'
+    - TASK='kitchen test nrsysmond-default-centos-67'
+    - TASK='kitchen test plugin-agent-default-centos-67'
+    - TASK='kitchen test generic-agent-default-centos-67'
+    - TASK='kitchen test php-agent-default-centos-67'
+    - TASK='kitchen test php-external-default-centos-67'
+    - TASK='kitchen test nrsysmond-default-centos-72'
+    - TASK='kitchen test plugin-agent-default-centos-72'
+    - TASK='kitchen test generic-agent-default-centos-72'
+    - TASK='kitchen test php-agent-default-centos-72'
+    - TASK='kitchen test php-external-default-centos-72'
+
+before_script:
+- source <(curl -sL https://raw.githubusercontent.com/zuazo/kitchen-in-travis/0.5.0/scripts/start_docker.sh)
+
+script:
+- bundle exec $TASK
+
+after_failure: cat docker_daemon.log

@@ -41,7 +41,7 @@ end
   directory ::File.dirname(dir) do
     owner node['newrelic-ng']['user']['name']
     group node['newrelic-ng']['user']['group']
-    mode  00755
+    mode  0o755
   end
 end
 
@@ -52,7 +52,7 @@ init_script_template = value_for_platform_family(
 
 # deploy initscript
 template '/etc/init.d/newrelic-plugin-agent' do
-  mode      00755
+  mode      0o755
   cookbook  'newrelic-ng'
   source    init_script_template
   variables config_file: node['newrelic-ng']['plugin-agent']['config_file'],

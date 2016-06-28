@@ -44,7 +44,7 @@ def install_agent
   target = "#{new_resource.target_dir}/#{new_resource.plugin_name}"
 
   directory target do
-    mode      00755
+    mode      0o755
     recursive true
   end
 
@@ -79,7 +79,7 @@ def configure_agent
   r = template config_file do
     owner     new_resource.owner
     group     new_resource.group
-    mode      00644
+    mode      0o644
     source    'generic-agent.yml.erb'
     cookbook  'newrelic-ng'
     variables license_key: new_resource.license_key,

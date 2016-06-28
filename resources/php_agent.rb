@@ -26,7 +26,7 @@ attribute :group,          kind_of: String, default: node['root_group']
 attribute :shell,          kind_of: String, default: node['newrelic-ng']['user']['shell']
 attribute :system,         kind_of: [TrueClass, FalseClass], default: node['newrelic-ng']['user']['system']
 
-attribute :mode,           kind_of: [Integer, String], default: 00644
+attribute :mode,           kind_of: [Integer, String], default: 0o644
 
 attribute :cookbook,       kind_of: String, default: 'newrelic-ng'
 attribute :source,         kind_of: String, default: 'newrelic.ini.php.erb'

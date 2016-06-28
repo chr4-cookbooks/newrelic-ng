@@ -19,7 +19,6 @@
 #
 
 action :configure do
-
   service 'newrelic-daemon' do
     supports status: true, start: true, stop: true, restart: true
   end
@@ -57,7 +56,7 @@ action :configure do
     # configure proxy daemon settings
     daemon_config = template new_resource.daemon_config_file do
       cookbook  new_resource.cookbook
-      source    new_resource.source
+      source    new_resource.source_cfg
       owner     new_resource.owner
       group     new_resource.group
       mode      new_resource.mode
@@ -94,5 +93,4 @@ action :configure do
   end
 
   new_resource.updated_by_last_action(true) if php_config.updated_by_last_action?
-
 end

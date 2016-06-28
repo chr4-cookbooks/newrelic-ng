@@ -19,7 +19,6 @@
 #
 
 action :configure do
-
   # postgresql and pgbouner need pg_config
   if new_resource.service_config.include?('postgresql:') ||
      new_resource.service_config.include?('pgbouncer:')
@@ -55,6 +54,6 @@ action :configure do
   service 'newrelic-plugin-agent' do
     supports   status: true, restart: true
     subscribes :restart, "template[#{new_resource.config_file}]"
-    action   [:enable, :start]
+    action     [:enable, :start]
   end
 end

@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of newrelic-ng.
 
+## 0.6.0:
+
+- Use an apparently working key for testing
+- Fix an issue with external `startup_mode`. See this [issue](https://github.com/chr4-cookbooks/newrelic-ng/issues/33)
+
 ## 0.5.4:
 
 - Fix attribute types, sometimes String was used, even though Boolean or Integer types were valid

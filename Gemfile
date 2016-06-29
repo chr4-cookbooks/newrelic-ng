@@ -10,4 +10,5 @@ end
 group :development, :test do
   gem 'rake'
   gem 'rubocop'
+  gem 'foodcritic'
 end

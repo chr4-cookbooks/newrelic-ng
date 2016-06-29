@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+use_inline_resources
 
 action :configure do
   service 'newrelic-daemon' do
@@ -25,7 +26,7 @@ action :configure do
 
   # ensure that the file #{new_resource.daemon_upgrade_file}
   # does not exist if it does, move it aside (or remove it)
-  execute 'newrelic-backup-key' do
+  execute "newrelic-backup-key-#{new_resource.daemon_upgrade_file}" do
     command "mv #{new_resource.daemon_upgrade_file} #{new_resource.daemon_upgrade_file}.external"
     only_if { ::File.exist?(new_resource.daemon_upgrade_file) }
   end
@@ -46,7 +47,7 @@ action :configure do
 
     # ensure that the file #{new_resource.daemon_config_file} does
     # not exist if it does, move it aside (or remove it)
-    execute 'newrelic-backup-cfg' do
+    execute "newrelic-backup-cfg-#{new_resource.daemon_config_file}" do
       command "mv #{new_resource.daemon_config_file} #{new_resource.daemon_config_file}.external"
       only_if { ::File.exist?(new_resource.daemon_config_file) }
     end

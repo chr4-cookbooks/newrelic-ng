@@ -2,6 +2,7 @@
 Berksfile.lock
 Gemfile.lock
 .ruby-version
+tmp
 *~
 *#
 .#*

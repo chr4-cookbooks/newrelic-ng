@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+use_inline_resources
 
 def install_agent
   # Do install system-wide ruby and use this ruby for the agent

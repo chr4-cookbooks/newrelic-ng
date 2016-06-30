@@ -82,7 +82,7 @@ def configure_agent
     group     new_resource.group
     mode      0o644
     source    'generic-agent.yml.erb'
-    cookbook  'newrelic-ng'
+    cookbook  cookbook_name
     variables license_key: new_resource.license_key,
               plugin_name: new_resource.plugin_name,
               config:      new_resource.config

@@ -18,6 +18,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe 'newrelic-ng::plugin-agent-install'
+include_recipe cookbook_name + '::plugin-agent-install'
 
 newrelic_ng_plugin_agent node['newrelic-ng']['license_key']

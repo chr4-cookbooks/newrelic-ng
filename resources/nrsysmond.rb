@@ -34,10 +34,9 @@ attribute :timeout,        kind_of: Integer, default: node['newrelic-ng']['nrsys
 attribute :hostname,       kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['hostname']
 attribute :labels,         kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config']['labels']
 
+attribute :mode,           kind_of: [Integer, String], default: node['newrelic-ng']['nrsysmond']['mode']
 attribute :owner,          kind_of: String,  default: 'root'
 attribute :group,          kind_of: String,  default: node['newrelic-ng']['user']['group']
 attribute :config_file,    kind_of: String,  default: node['newrelic-ng']['nrsysmond']['config_file']
-attribute :mode,           kind_of: [Integer, String], default: node['newrelic-ng']['nrsysmond']['mode']
 
-attribute :cookbook,       kind_of: String,  default: 'newrelic-ng'
 attribute :source,         kind_of: String,  default: 'nrsysmond.cfg.erb'

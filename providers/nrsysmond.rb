@@ -29,7 +29,7 @@ action :configure do
 
   r = template 'nrsysmond.cfg' do
     path      new_resource.config_file
-    cookbook  new_resource.cookbook
+    cookbook  cookbook_name
     source    new_resource.source
     owner     new_resource.owner
     group     new_resource.group

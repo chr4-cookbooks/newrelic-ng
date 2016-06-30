@@ -36,7 +36,7 @@ action :configure do
   python_pip 'newrelic_plugin_agent[postgresql]' if new_resource.service_config.include? 'postgresql:'
 
   r = template new_resource.config_file do
-    cookbook  new_resource.cookbook
+    cookbook  cookbook_name
     source    new_resource.source
     owner     new_resource.owner
     group     new_resource.group

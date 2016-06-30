@@ -53,7 +53,7 @@ init_script_template = value_for_platform_family(
 # deploy initscript
 template '/etc/init.d/newrelic-plugin-agent' do
   mode      0o755
-  cookbook  'newrelic-ng'
+  cookbook  cookbook_name
   source    init_script_template
   variables config_file: node['newrelic-ng']['plugin-agent']['config_file'],
             user:        node['newrelic-ng']['user']['name'],
